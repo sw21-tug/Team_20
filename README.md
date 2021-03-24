@@ -1,2 +1,2 @@
-# Team-20
+# Team_20
 Vaccination Passport
