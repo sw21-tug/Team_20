@@ -18,7 +18,7 @@ class VaccineListActivityTest
         /*
         * Test if recycler View is displayed
          */
-        val scenario = ActivityScenario.launch(VaccineList::class.java)
+        val scenario = ActivityScenario.launch(VaccineListActivity::class.java)
         onView(withId(R.id.rvVaccineList)).check(matches(isDisplayed()))
         scenario.close()
     }
@@ -29,7 +29,7 @@ class VaccineListActivityTest
         /*
         * Test if Disease text is displayed
          */
-        val scenario = ActivityScenario.launch(VaccineList::class.java)
+        val scenario = ActivityScenario.launch(VaccineListActivity::class.java)
         onView(withId(R.id.tvVaccineName)).check(matches(isDisplayed()))
 
         onView(withId(R.id.tvVaccineName)).check(matches(withText("Disease")))
@@ -42,7 +42,7 @@ class VaccineListActivityTest
         /*
         * Test if vaccine date is displayed
          */
-        val scenario = ActivityScenario.launch(VaccineList::class.java)
+        val scenario = ActivityScenario.launch(VaccineListActivity::class.java)
         onView(withId(R.id.tvVaccineDate)).check(matches(isDisplayed()))
 
         onView(withId(R.id.tvVaccineDate)).check(matches(withText("Date")))
