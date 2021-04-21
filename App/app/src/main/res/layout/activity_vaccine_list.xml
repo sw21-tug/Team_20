@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".VaccineList"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:paddingBottom="8dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="12dp"
     >
 
     <TextView
@@ -33,9 +33,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvVaccineList"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
     />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
