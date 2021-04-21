@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="Passport Number" />
 
             <EditText
@@ -85,8 +85,7 @@
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword" />
-
-
+    
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,6 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="#FFC5C5"
                     android:text="Login" />
 
                 <Space
@@ -127,12 +127,13 @@
                     android:layout_weight="0"
                     android:text="Don't have an account? " />
 
-                <Button
-                    android:id="@+id/button3"
+                <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Sing up" />
+                    android:text="Sing up"
+                    android:textColor="#2196F3" />
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
