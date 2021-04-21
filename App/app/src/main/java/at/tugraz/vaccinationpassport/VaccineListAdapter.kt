@@ -1,9 +1,10 @@
 package at.tugraz.vaccinationpassport
 
-import android.support.v7.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import at.tugraz.vaccinationpassport.R.layout.vaccine_list_item
 import kotlinx.android.synthetic.main.vaccine_list_item.view.*
 
