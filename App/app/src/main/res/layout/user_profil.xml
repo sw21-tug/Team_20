@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFC5C5"
+        android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menuButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="0"
+                android:text="@string/button_minus" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="0"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/passportImage"
+        android:layout_width="96dp"
+        android:layout_height="138dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="140dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/profilepic" />
+
+    <TextView
+        android:id="@+id/nameDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="140dp"
+        android:text="@string/tv_name"
+        app:layout_constraintStart_toEndOf="@+id/passportImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ageDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/tv_age"
+        app:layout_constraintStart_toEndOf="@+id/passportImage"
+        app:layout_constraintTop_toBottomOf="@+id/nameDisplay" />
+
+    <TextView
+        android:id="@+id/passNrDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/tv_passNr"
+        app:layout_constraintStart_toEndOf="@+id/passportImage"
+        app:layout_constraintTop_toBottomOf="@+id/ageDisplay" />
+
+    <TextView
+        android:id="@+id/nrVacDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/tv_nrVac"
+        app:layout_constraintStart_toEndOf="@+id/passportImage"
+        app:layout_constraintTop_toBottomOf="@+id/passNrDisplay" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameText" />
+
+    <TextView
+        android:id="@+id/passNrText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ageText" />
+
+    <TextView
+        android:id="@+id/nrVacText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passNrText" />
+
+    <ImageView
+        android:id="@+id/seeVacList"
+        android:layout_width="190dp"
+        android:layout_height="186dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="120dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/seemyvac" />
+
+
+</android.support.constraint.ConstraintLayout>
