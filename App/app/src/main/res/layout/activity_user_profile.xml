@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,7 +40,7 @@
 
 
     <ImageView
-        android:id="@+id/passportImage"
+        android:id="@+id/imPassportImage"
         android:layout_width="96dp"
         android:layout_height="138dp"
         android:layout_marginStart="30dp"
@@ -51,47 +50,47 @@
         android:src="@drawable/profilepic" />
 
     <TextView
-        android:id="@+id/nameDisplay"
+        android:id="@+id/tvNameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="140dp"
         android:text="@string/tv_name"
-        app:layout_constraintStart_toEndOf="@+id/passportImage"
+        app:layout_constraintStart_toEndOf="@+id/imPassportImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ageDisplay"
+        android:id="@+id/tvAgeDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="20dp"
         android:text="@string/tv_age"
-        app:layout_constraintStart_toEndOf="@+id/passportImage"
-        app:layout_constraintTop_toBottomOf="@+id/nameDisplay" />
+        app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameDisplay" />
 
     <TextView
-        android:id="@+id/passNrDisplay"
+        android:id="@+id/tvPassNrDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="20dp"
         android:text="@string/tv_passNr"
-        app:layout_constraintStart_toEndOf="@+id/passportImage"
-        app:layout_constraintTop_toBottomOf="@+id/ageDisplay" />
+        app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvAgeDisplay" />
 
     <TextView
-        android:id="@+id/nrVacDisplay"
+        android:id="@+id/tvNrVacDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="20dp"
         android:text="@string/tv_nrVac"
-        app:layout_constraintStart_toEndOf="@+id/passportImage"
-        app:layout_constraintTop_toBottomOf="@+id/passNrDisplay" />
+        app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvPassNrDisplay" />
 
     <TextView
-        android:id="@+id/nameText"
+        android:id="@+id/tvNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
@@ -100,34 +99,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ageText"
+        android:id="@+id/tvAgeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameText" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameText" />
 
     <TextView
-        android:id="@+id/passNrText"
+        android:id="@+id/tvPassNrText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ageText" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAgeText" />
 
     <TextView
-        android:id="@+id/nrVacText"
+        android:id="@+id/tvNrVacText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passNrText" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPassNrText" />
 
     <ImageView
-        android:id="@+id/seeVacList"
+        android:id="@+id/imSeeVacList"
         android:layout_width="190dp"
         android:layout_height="186dp"
         android:layout_marginEnd="105dp"
@@ -138,4 +137,4 @@
         app:srcCompat="@drawable/seemyvac" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
