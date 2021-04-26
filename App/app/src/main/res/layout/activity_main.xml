@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                app:srcCompat="@android:drawable/ic_dialog_info" />
+                app:srcCompat="@drawable/ic_syringe" />
 
             <TextView
                 android:id="@+id/textView"
