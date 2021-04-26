@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFC5C5"
+            android:background="@color/BackgroundAccent"
             android:orientation="horizontal">
 
             <Button
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFC5C5"
+                    android:backgroundTint="@color/BackgroundAccent"
                     android:text="Login" />
 
                 <Space
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="Sing up"
-                    android:textColor="#2196F3" />
+                    android:textColor="@color/LinkBase" />
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
