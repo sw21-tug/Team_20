@@ -1,6 +1,8 @@
 package at.tugraz.vaccinationpassport
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 
@@ -10,10 +12,10 @@ class UserProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        val nameText : TextView = findViewById(R.id.tvNameText) as TextView
-        val ageText : TextView = findViewById(R.id.tvAgeText) as TextView
-        val passNrText : TextView = findViewById(R.id.tvPassNrText) as TextView
-        val nrVacText : TextView = findViewById(R.id.tvNrVacText) as TextView
+        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText) //findViewById(R.id.tvNameText) as TextView
+        val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
+        val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
+        val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
 
         val person = listOf<String>("Max Mustermann","25","1234567","5")
 
@@ -21,5 +23,10 @@ class UserProfileActivity : AppCompatActivity() {
         ageText.text = person[1]
         passNrText.text = person[2]
         nrVacText.text = person[3]
+    }
+
+    fun showingVacList(view: View) {
+        val intent = Intent(this, VaccineListActivity::class.java)
+        startActivity(intent)
     }
 }
