@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import at.tugraz.vaccinationpassport.backend.Server
+import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 
 class MainActivity : AppCompatActivity() {
-    private val server = Server()
+    private val server = Server(Repository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
