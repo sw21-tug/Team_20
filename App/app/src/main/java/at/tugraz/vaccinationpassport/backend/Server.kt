@@ -7,11 +7,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.net.ConnectException
+import java.lang.Exception
 
 
 class Server(private val repository: Repository) {
     private lateinit var authToken: String
+
+    var onLoginSuccessful: () -> Unit = {}
+    var onLoginFailed: (Boolean) -> Unit = {}
+
 
     fun login(loginDetails: LoginDetails) {
         GlobalScope.launch {
@@ -21,15 +25,21 @@ class Server(private val repository: Repository) {
                 GlobalScope.launch(Dispatchers.Main) {
                     handleLoginResponse(response)
                 }
-            } catch (e: ConnectException) {
+            } catch (e: Exception) {
                 GlobalScope.launch(Dispatchers.Main) {
-                    return@launch
+                    onLoginFailed(false)
                 }
             }
         }
     }
 
     private fun handleLoginResponse(response: Response<Unit>) {
+        if (!response.isSuccessful || response.code() != 200 || response.headers()["Authorization"] == null) {
+            onLoginFailed(true)
+            return
+        }
 
+        authToken = response.headers()["Authorization"]!!
+        onLoginSuccessful()
     }
 }

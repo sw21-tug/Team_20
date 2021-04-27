@@ -1,6 +1,7 @@
 package at.tugraz.vaccinationpassport
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             displayLoginError("Invalid Passport Number / Password")
             return
         }
+        server.onLoginSuccessful = ::onLoginSuccessful
+        server.onLoginFailed = ::onLoginFailed
         server.login(loginDetails)
     }
 
@@ -50,5 +53,22 @@ class MainActivity : AppCompatActivity() {
         val passwordString = password.text.toString()
 
         return LoginDetails(passportNumber, passwordString)
+    }
+
+    private fun onLoginSuccessful() {
+        val password = findViewById<EditText>(R.id.loginPassword)
+        password.setText("")
+
+        // Switch to other activity
+        val intent = Intent(this, UserProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun onLoginFailed(couldConnectToServer: Boolean) {
+        if (couldConnectToServer) {
+            displayLoginError("Invalid Passport Number / Password")
+        } else {
+            displayLoginError("Could not connect to the server")
+        }
     }
 }
