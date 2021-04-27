@@ -59,7 +59,7 @@ class MainActivityTest{
 
         sleep(1000)
 
-        onView(withId(R.id.VaccineList)).check(matches(isDisplayed()));
+        onView(withId(R.id.imPassportImage)).check(matches(isDisplayed()));
         activityScenario.close()
     }
 
