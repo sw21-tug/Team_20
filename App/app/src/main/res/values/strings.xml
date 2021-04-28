@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Vaccination Passport</string>
-    <string name="tv_name">Name</string>
-    <string name="tv_age">Age</string>
-    <string name="tv_passNr">Passport nr.</string>
-    <string name="tv_nrVac">Nr of vacciens</string>
+    <string name="tv_name">Name:</string>
+    <string name="tv_age">Age:</string>
+    <string name="tv_passNr">Passport Nr:</string>
+    <string name="tv_nrVac">Nr of Vaccines:</string>
     <string name="button_minus">-</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="see_my_vaccines">See my Vaccines</string>
 </resources>
