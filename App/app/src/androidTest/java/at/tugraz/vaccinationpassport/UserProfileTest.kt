@@ -26,7 +26,7 @@ class UserProfileTest
         * Test if Name Label is displayed
          */
         val id = R.id.tvNameDisplay
-        val text = "Name"
+        val text = "Name:"
 
         tvTest(id,text)
     }
@@ -38,7 +38,7 @@ class UserProfileTest
         * Test if age Label is displayed
          */
         val id = R.id.tvAgeDisplay
-        val text = "Age"
+        val text = "Age:"
 
         tvTest(id,text)
     }
@@ -50,7 +50,7 @@ class UserProfileTest
         * Test if Passport nr Label is displayed
          */
         val id = R.id.tvPassNrDisplay
-        val text = "Passport nr."
+        val text = "Passport Nr:"
 
         tvTest(id,text)
     }
@@ -62,7 +62,7 @@ class UserProfileTest
         * Test if NrVacciens Label is displayed
          */
         val id = R.id.tvNrVacDisplay
-        val text = "Nr of Vaccines"
+        val text = "Nr of Vaccines:"
 
         tvTest(id,text)
     }
