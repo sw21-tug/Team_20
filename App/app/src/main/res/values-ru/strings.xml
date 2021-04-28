@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vaccination Passport</string>
+    <string name="tv_name">Имя</string>
+    <string name="tv_age">Возраст</string>
+    <string name="tv_passNr">Паспорт №</string>
+    <string name="tv_nrVac">Kol-vo vaktsin</string>
+    <string name="button_minus">-</string>
+</resources>
