@@ -8,6 +8,7 @@ class UserRepository(private val bCryptPasswordEncoder: BCryptPasswordEncoder) {
     //TODO: bCryptPasswordEncoder and initializer only for current testing purposes
     init {
         users.add(User("admin", bCryptPasswordEncoder.encode("password")))
+        users.add(User("12345678", bCryptPasswordEncoder.encode("password")))
     }
 
     fun findByUsername(username: String): User? {
