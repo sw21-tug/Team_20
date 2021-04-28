@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvInfoQr" type="id"></item>
+    <item name="imScanQr" type="id"></item>
+    <item name="tvInfoList" type="id"></item>
+</resources>
