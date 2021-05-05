@@ -6,11 +6,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitInstance {
+    var url: String = BASE_URL
+
     private val retrofit by lazy {
         Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     val api: ServerApi by lazy {

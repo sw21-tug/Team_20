@@ -4,6 +4,7 @@ import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.RetrofitInstance
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
