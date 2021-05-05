@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Vaccination Passport</string>
-    <string name="tv_name">Имя</string>
-    <string name="tv_age">Возраст</string>
-    <string name="tv_passNr">Паспорт №</string>
-    <string name="tv_nrVac">Kol-vo vaktsin</string>
+    <string name="tv_name">Имя:</string>
+    <string name="tv_age">Возраст:</string>
+    <string name="tv_passNr">Паспорт №:</string>
+    <string name="tv_nrVac">Kol-vo vaktsin:</string>
     <string name="button_minus">-</string>
     <string name="language_key">at.tugraz.vaccinationpassport.langauge</string>
+    <string name="scan_qr_code">Сканировать QR-код</string>
+    <string name="see_my_vaccines">Посмотреть мои вакцины</string>
+    <string name="loginButton">Авторизоваться</string>
+    <string name="errorMessageDefault">Поле сообщения об ошибке</string>
+    <string name="passportNumberHint">Номер паспорта</string>
+    <string name="passwordHint">Пароль</string>
+    <string name="loginTitle">Авторизоваться</string>
+    <string name="noAccountInformation">Нет учетной записи?</string>
+    <string name="singUpLink">Зарегистрируйтесь</string>
 </resources>

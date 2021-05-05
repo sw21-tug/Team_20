@@ -38,7 +38,7 @@ class LocalizationTest
          */
 
         val id = R.id.tvNameDisplay
-        val text = "Name"
+        val text = "Name:"
         tvtestLocale("en", id, text)
     }
 
@@ -49,7 +49,7 @@ class LocalizationTest
         * Test if age Label is displayed
          */
         val id = R.id.tvAgeDisplay
-        val text = "Age"
+        val text = "Age:"
         tvtestLocale("en", id, text)
     }
 
@@ -60,7 +60,7 @@ class LocalizationTest
         * Test if Passport nr Label is displayed
          */
         val id = R.id.tvPassNrDisplay
-        val text = "Passport nr."
+        val text = "Passport Nr:"
         tvtestLocale("en", id, text)
     }
 
@@ -71,7 +71,7 @@ class LocalizationTest
         * Test if NrVacciens Label is displayed
          */
         val id = R.id.tvNrVacDisplay
-        val text = "Nr of vacciens"
+        val text = "Nr of Vaccines:"
         tvtestLocale("en", id, text)
     }
 
@@ -83,7 +83,7 @@ class LocalizationTest
          */
 
         val id = R.id.tvNameDisplay
-        val text = "Имя"
+        val text = "Имя:"
         tvtestLocale("ru", id, text)
     }
 
@@ -94,7 +94,7 @@ class LocalizationTest
         * Test if age Label is displayed
          */
         val id = R.id.tvAgeDisplay
-        val text = "Возраст"
+        val text = "Возраст:"
         tvtestLocale("ru", id, text)
     }
 
@@ -105,7 +105,7 @@ class LocalizationTest
         * Test if Passport nr Label is displayed
          */
         val id = R.id.tvPassNrDisplay
-        val text = "Паспорт №"
+        val text = "Паспорт №:"
         tvtestLocale("ru", id, text)
     }
 
@@ -116,7 +116,7 @@ class LocalizationTest
         * Test if NrVacciens Label is displayed
          */
         val id = R.id.tvNrVacDisplay
-        val text = "Kol-vo vaktsin"
+        val text = "Kol-vo vaktsin:"
         tvtestLocale("ru", id, text)
     }
 }
