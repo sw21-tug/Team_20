@@ -3,21 +3,46 @@ package at.tugraz.vaccinationpassport
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
+import androidx.drawerlayout.widget.DrawerLayout
 import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val server = Server(Repository())
+    lateinit var toggle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
+        // set the toolbar as action bar
+        setSupportActionBar(toolbar)
+
+        toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+
+        toggle.isDrawerIndicatorEnabled = true
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+    }
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean{
+        if(toggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun onLoginClicked(view: View) {

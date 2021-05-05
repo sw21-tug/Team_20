@@ -6,6 +6,8 @@
     <string name="tv_passNr">Паспорт №:</string>
     <string name="tv_nrVac">Kol-vo vaktsin:</string>
     <string name="button_minus">-</string>
+    <string name="drawer_open">открыто</string>
+    <string name="drawer_close">Закрывать</string>
     <string name="language_key">at.tugraz.vaccinationpassport.langauge</string>
     <string name="scan_qr_code">Сканировать QR-код</string>
     <string name="see_my_vaccines">Посмотреть мои вакцины</string>
