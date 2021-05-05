@@ -41,7 +41,7 @@ class HamburgerMenuTest {
             .check(matches(isClickable()))
 
         // close drawer
-        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.editTextTextPersonName)
+        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.loginPassportNumber)
         ).perform(click())
 
         // check if drawer is gone

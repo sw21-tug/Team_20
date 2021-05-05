@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.VaccinationPassport" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/light_pink</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorPrimary">@color/BackgroundAccent</item>
+        <item name="colorPrimaryDark">@color/BackgroundDark</item>
+        <item name="colorAccent">@color/BackgroundAccent</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
