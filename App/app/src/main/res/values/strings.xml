@@ -5,6 +5,7 @@
     <string name="tv_passNr">Passport Nr:</string>
     <string name="tv_nrVac">Nr of Vaccines:</string>
     <string name="button_minus">-</string>
+    <string name="language_key">at.tugraz.vaccinationpassport.langauge</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="see_my_vaccines">See my Vaccines</string>
     <string name="loginButton">Login</string>
