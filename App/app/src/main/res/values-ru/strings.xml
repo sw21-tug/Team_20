@@ -6,4 +6,5 @@
     <string name="tv_passNr">Паспорт №</string>
     <string name="tv_nrVac">Kol-vo vaktsin</string>
     <string name="button_minus">-</string>
+    <string name="language_key">at.tugraz.vaccinationpassport.langauge</string>
 </resources>

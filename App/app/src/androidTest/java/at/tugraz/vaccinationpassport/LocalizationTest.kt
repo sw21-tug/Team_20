@@ -1,8 +1,11 @@
 package at.tugraz.vaccinationpassport
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -16,23 +19,15 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 class LocalizationTest
 {
-    private fun tvtestLocale(language: String, id:Int,text:String){
-        setLocale(language)
+    private fun tvtestLocale(language: String, id:Int,text:String) {
 
-        val scenario = ActivityScenario.launch(UserProfileActivity::class.java)
-        onView(withId(id)).check(matches(isDisplayed()))
+        val appContext = ApplicationProvider.getApplicationContext<Context>()
+        val intent = Intent(appContext, UserProfileActivity::class.java)
+        intent.putExtra(appContext.resources.getString(R.string.language_key), language)
+        val scenario = ActivityScenario.launch<UserProfileActivity>(intent)
 
         onView(withId(id)).check(matches(withText(text)))
         scenario.close()
-    }
-
-    private fun setLocale(language: String, country: String = "default") {
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.setLocale(locale)
-        val baseContext = InstrumentationRegistry.getInstrumentation().context
-        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
     }
 
     @Test

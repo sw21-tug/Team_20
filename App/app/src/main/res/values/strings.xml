@@ -5,4 +5,5 @@
     <string name="tv_passNr">Passport nr.</string>
     <string name="tv_nrVac">Nr of vacciens</string>
     <string name="button_minus">-</string>
+    <string name="language_key">at.tugraz.vaccinationpassport.langauge</string>
 </resources>
