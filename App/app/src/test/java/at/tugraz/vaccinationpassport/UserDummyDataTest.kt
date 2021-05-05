@@ -1,17 +1,35 @@
 package at.tugraz.vaccinationpassport
 
-import at.tugraz.vaccinationpassport.backend.Server
+import Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import java.lang.Thread.sleep
 
 class UserDummyData {
     var calledResponseFunction: Boolean = false
+    private val testDispatcher = TestCoroutineDispatcher()
 
+    @Before
+    fun setup() {
+        // provide the scope explicitly, in this example using a constructor parameter
+        Dispatchers.setMain(testDispatcher)
+    }
+
+    @After
+    fun cleanUp() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
     @Test
     fun getProfileWithValidCredentials() {
         val server = Server(Repository())
