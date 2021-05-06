@@ -20,4 +20,7 @@
     <string name="singUpLink">Зарегистрируйтесь</string>
     <string name="disease">Болезнь</string>
     <string name="date">Дата</string>
+    <string name="invalid_login_details">Неверный номер паспорта / пароль</string>
+    <string name="could_not_connect_to_server">не удалось установить соединение с сервером</string>
+    <string name="registering_not_implemented">Регистрация не реализована</string>
 </resources>

@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onLoginClicked(view: View) {
         val loginDetails = getEnteredData()
         if (loginDetails == null) {
-            displayLoginError("Invalid Passport Number / Password")
+            displayLoginError(getString(R.string.invalid_login_details))
             return
         }
         server.onLoginSuccessful = ::onLoginSuccessful
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun onRegisterClicked(view: View) {
-        displayLoginError("Registering is not Implemented")
+        displayLoginError(getString(R.string.registering_not_implemented))
     }
 
     private fun displayLoginError(message: String) {
@@ -135,9 +135,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun onLoginFailed(couldConnectToServer: Boolean) {
         if (couldConnectToServer) {
-            displayLoginError("Invalid Passport Number / Password")
+            displayLoginError(getString(R.string.invalid_login_details))
         } else {
-            displayLoginError("Could not connect to the server")
+            displayLoginError(getString(R.string.could_not_connect_to_server))
         }
     }
 }
