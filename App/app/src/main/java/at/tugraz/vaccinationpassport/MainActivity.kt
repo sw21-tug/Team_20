@@ -2,6 +2,8 @@ package at.tugraz.vaccinationpassport
 
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -14,14 +16,34 @@ import androidx.drawerlayout.widget.DrawerLayout
 import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val server = Server(Repository())
     lateinit var toggle : ActionBarDrawerToggle
 
+    fun setLocale(languageCode: String?) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val resources: Resources = this.resources
+        val config: Configuration = resources.getConfiguration()
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.getDisplayMetrics())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val intent = this.intent
+        val language = intent.extras?.get(resources.getString(R.string.language_key))
+        if (language != null) {
+            setLocale(language as String?)
+        }
+        else {
+            setLocale("en")
+        }
+
         setContentView(R.layout.activity_main)
         val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
         // set the toolbar as action bar
@@ -36,7 +58,27 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+        val navigationView: NavigationView = findViewById(R.id.navigationView)
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.bringToFront()
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.btn_language_ru) {
+            changeLanguage("ru")
+        }
+        if (item.itemId == R.id.btn_language_en) {
+            changeLanguage("en")
+        }
+        return true
+    }
+
+    private fun changeLanguage(language: String) {
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
+        startActivity(intent)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem) : Boolean{
         if(toggle.onOptionsItemSelected(item))
         {
@@ -48,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     fun onLoginClicked(view: View) {
         val loginDetails = getEnteredData()
         if (loginDetails == null) {
-            displayLoginError("Invalid Passport Number / Password")
+            displayLoginError(getString(R.string.invalid_login_details))
             return
         }
         server.onLoginSuccessful = ::onLoginSuccessful
@@ -57,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onRegisterClicked(view: View) {
-        displayLoginError("Registering is not Implemented")
+        displayLoginError(getString(R.string.registering_not_implemented))
     }
 
     private fun displayLoginError(message: String) {
@@ -84,16 +126,18 @@ class MainActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.loginPassword)
         password.setText("")
 
+        val language = this.intent.extras?.getString(resources.getString(R.string.language_key))
         // Switch to other activity
         val intent = Intent(this, UserProfileActivity::class.java)
+        intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
         startActivity(intent)
     }
 
     private fun onLoginFailed(couldConnectToServer: Boolean) {
         if (couldConnectToServer) {
-            displayLoginError("Invalid Passport Number / Password")
+            displayLoginError(getString(R.string.invalid_login_details))
         } else {
-            displayLoginError("Could not connect to the server")
+            displayLoginError(getString(R.string.could_not_connect_to_server))
         }
     }
 }

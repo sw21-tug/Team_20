@@ -3,11 +3,13 @@
     android:id="@+id/btn_context_menu"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item android:id="@+id/btn_about_page"
         android:title="About"
         />
-    <item android:id="@+id/btn_language"
+    <item android:id="@+id/btn_language_ru"
         android:title="Russian"
+        />
+    <item android:id="@+id/btn_language_en"
+        android:title="English"
         />
 </menu>

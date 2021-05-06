@@ -37,7 +37,7 @@ class HamburgerMenuTest {
             .check(matches(isClickable()))
 
         // check if language button is clickable
-        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.btn_language))
+        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.btn_language_ru))
             .check(matches(isClickable()))
 
         // close drawer
