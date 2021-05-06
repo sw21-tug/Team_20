@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.setNavigationItemSelectedListener(this)
+        navigationView.bringToFront()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

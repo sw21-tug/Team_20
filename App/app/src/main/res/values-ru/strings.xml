@@ -18,4 +18,6 @@
     <string name="loginTitle">Авторизоваться</string>
     <string name="noAccountInformation">Нет учетной записи?</string>
     <string name="singUpLink">Зарегистрируйтесь</string>
+    <string name="disease">Болезнь</string>
+    <string name="date">Дата</string>
 </resources>

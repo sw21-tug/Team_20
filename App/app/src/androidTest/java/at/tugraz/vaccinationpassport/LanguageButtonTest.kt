@@ -1,6 +1,7 @@
 package at.tugraz.vaccinationpassport
 
 import android.content.Context
+import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
@@ -17,7 +18,7 @@ import org.junit.runner.RunWith
 class LanguageButtonTest {
 
     @Test
-    fun testChangeLanguageToRU()
+    fun testChangeLanguageFromEnToRu()
     {
         /*
         * Test if language button click changes language to ru
@@ -53,6 +54,50 @@ class LanguageButtonTest {
         Espresso.onView(withId(R.id.loginButton)).check(matches(withText("Авторизоваться")))
         Espresso.onView(withId(R.id.textView)).check(matches(withText("Нет учетной записи?")))
         Espresso.onView(withId(R.id.SignUpButton)).check(matches(withText("Зарегистрируйтесь")))
+
+        activityScenario.close()
+    }
+
+    @Test
+    fun testChangeLanguageFromRuToEn()
+    {
+        /*
+        * Test if language button click changes language to en
+         */
+
+        val appContext = ApplicationProvider.getApplicationContext<Context>()
+        val intent = Intent(appContext, MainActivity::class.java)
+        intent.putExtra(appContext.resources.getString(R.string.language_key), "ru")
+        val activityScenario = ActivityScenario.launch<UserProfileActivity>(intent)
+
+        //check ru language
+        Espresso.onView(withId(R.id.loginTitle)).check(matches(withText("Авторизоваться")))
+        Espresso.onView(withId(R.id.loginButton)).check(matches(withText("Авторизоваться")))
+        Espresso.onView(withId(R.id.textView)).check(matches(withText("Нет учетной записи?")))
+        Espresso.onView(withId(R.id.SignUpButton)).check(matches(withText("Зарегистрируйтесь")))
+
+        // open nav drawer
+        Espresso.onView(withContentDescription(at.tugraz.vaccinationpassport.R.string.drawer_open)
+        ).perform(click())
+
+        // check if nav header is displayed
+        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.nav_layout))
+            .check(matches(isDisplayed()))
+
+        // check if language button is clickable
+        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.btn_language_en))
+            .check(matches(isClickable()))
+
+        Espresso.onView(withId(at.tugraz.vaccinationpassport.R.id.btn_language_en))
+            .perform(click())
+
+        //check en language
+        Espresso.onView(withId(R.id.loginTitle)).check(matches(withText("Login")))
+        Espresso.onView(withId(R.id.loginButton)).check(matches(withText("Login")))
+        Espresso.onView(withId(R.id.textView)).check(matches(withText("Don\'t have an account?")))
+        Espresso.onView(withId(R.id.SignUpButton)).check(matches(withText("Sign up")))
+
+        activityScenario.close()
     }
 
 }

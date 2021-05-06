@@ -17,4 +17,6 @@
     <string name="loginTitle">Login</string>
     <string name="noAccountInformation">Don\'t have an account?</string>
     <string name="singUpLink">Sign up</string>
+    <string name="disease">Disease</string>
+    <string name="date">Date</string>
 </resources>

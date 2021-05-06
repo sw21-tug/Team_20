@@ -49,7 +49,9 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     fun showingVacList(view: View) {
+        val language = this.intent.extras?.getString(resources.getString(R.string.language_key))
         val intent = Intent(this, VaccineListActivity::class.java)
+        intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
         startActivity(intent)
     }
 }
