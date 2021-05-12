@@ -95,21 +95,16 @@ class UserDummyVaccinationTest {
     }
 
     private fun testVaccineListValid(vaccine_list: List<Vaccination>) {
+        isVaccineListValid = true
 
-        var index = 0
-
-        for (v in vaccine_list)
+        for (i in vaccine_list.indices)
         {
-            val name_valid = v.name == "Vaccine Nr. $index"
-            val date_valid = v.date == "2021-0${index + 1}-0${index + 1}"
-
-            if(!name_valid || !date_valid)
+            if(vaccine_list[i].name != "Vaccine Nr. $i" ||
+                vaccine_list[i].date != "2021-0${i + 1}-0${i + 1}")
             {
                 isVaccineListValid = false
-                return
+                return;
             }
-
-            index += 1
         }
     }
 }
