@@ -3,6 +3,7 @@ package at.tugraz.vaccinationpassport
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_vaccine_list.*
 import java.util.*
@@ -31,8 +32,10 @@ class VaccineListActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_vaccine_list)
-
+        
         vaccineListAdapter = VaccineListAdapter(mutableListOf())
+        vaccineListAdapter.addVaccine(Vaccination("Covid", "05-05-2021"))
+        vaccineListAdapter.addVaccine(Vaccination("Malaria", "05-05-2021"))
         rvVaccineList.adapter = vaccineListAdapter;
     }
 }
