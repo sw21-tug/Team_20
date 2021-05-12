@@ -3,44 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".VaccineListActivity"
-    android:paddingStart="8dp"
-    android:paddingEnd="12dp"
-    android:paddingBottom="12dp"
-    >
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvVaccineName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/disease"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/rvVaccineList"
-        app:layout_constraintStart_toStartOf="parent"
-    />
-
-    <TextView
-        android:id="@+id/tvVaccineDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/date"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/rvVaccineList"
-        app:layout_constraintEnd_toEndOf="parent"
-    />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvVaccineList"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vaccine_list_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="50dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
         app:layout_constraintTop_toTopOf="parent"
-    />
+        tools:context=".VaccineListActivity">
+
+
+        <TextView
+            android:id="@+id/tvDisease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disease"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/rvVaccineList"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvVaccinationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/rvVaccineList"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvVaccineList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
