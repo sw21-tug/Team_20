@@ -12,6 +12,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class VaccineListActivityTest
 {
+
     @Test
     fun testRecyclerViewDisplay()
     {
@@ -30,9 +31,9 @@ class VaccineListActivityTest
         * Test if Disease text is displayed
          */
         val scenario = ActivityScenario.launch(VaccineListActivity::class.java)
-        onView(withId(R.id.tvVaccineName)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvDisease)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.tvVaccineName)).check(matches(withText("Disease")))
+        onView(withId(R.id.tvDisease)).check(matches(withText("Disease")))
         scenario.close()
     }
 
@@ -43,9 +44,9 @@ class VaccineListActivityTest
         * Test if vaccine date is displayed
          */
         val scenario = ActivityScenario.launch(VaccineListActivity::class.java)
-        onView(withId(R.id.tvVaccineDate)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvVaccinationDate)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.tvVaccineDate)).check(matches(withText("Date")))
+        onView(withId(R.id.tvVaccinationDate)).check(matches(withText("Date")))
         scenario.close()
     }
 }
