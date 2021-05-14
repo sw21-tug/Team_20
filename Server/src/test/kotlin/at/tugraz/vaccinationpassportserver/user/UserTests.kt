@@ -91,4 +91,36 @@ class UserTest {
             HttpMethod.GET, entity, User::class.java)
         assertEquals(expectedStatusCode, response.statusCode)
     }
+
+    @Test
+    fun getOwnUserdetails_shouldNotSendPassword() {
+
+        // Preparation
+        val expectedStatusCodePrep = HttpStatus.OK
+        val headersPrep = HttpHeaders()
+        val bodyPrep = "{\n" +
+                "    \"passportNumber\":\"12345678\",\n" +
+                "    \"password\":\"password\"\n" +
+                "}"
+        val entityPrep = HttpEntity<String>(bodyPrep, headersPrep)
+        val responsePrep = restTemplate.exchange(
+            "http://localhost:$port/login",
+            HttpMethod.POST, entityPrep, String::class.java)
+        assertEquals(expectedStatusCodePrep, responsePrep.statusCode)
+        val authentication = responsePrep.headers.getOrEmpty("Authorization")
+        assertTrue(authentication.isNotEmpty())
+        val bearer = authentication[0]
+
+        // Test
+        val expectedStatusCode = HttpStatus.OK
+        val headers = HttpHeaders()
+        headers.add("Authorization", bearer)
+        val entity = HttpEntity<String>(null, headers)
+        val response = restTemplate.exchange(
+            "http://localhost:$port/users/12345678",
+            HttpMethod.GET, entity, User::class.java)
+        assertEquals(expectedStatusCode, response.statusCode)
+
+        assertEquals(null, response.body?.getPassword())
+    }
 }
