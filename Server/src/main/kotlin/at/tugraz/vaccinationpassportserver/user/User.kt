@@ -1,8 +1,12 @@
 package at.tugraz.vaccinationpassportserver.user
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+
 class User() {
 
     private var passportNumber: String? = null
+
+    @JsonIgnore
     private var password: String? = null
     private var age: Int? = null
     private var name: String? = null

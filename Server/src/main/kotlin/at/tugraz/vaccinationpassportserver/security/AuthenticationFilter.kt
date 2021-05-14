@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse
 class AuthenticationFilter(authenticationManager: AuthenticationManager?) : UsernamePasswordAuthenticationFilter(authenticationManager) {
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication? {
         return try {
-            val creds: User = ObjectMapper().readValue(request.inputStream, User::class.java)
+            val creds: PassportNumberPasswordAuthenticationRequest = ObjectMapper().readValue(request.inputStream, PassportNumberPasswordAuthenticationRequest::class.java)
             authenticationManager.authenticate(UsernamePasswordAuthenticationToken(creds.getPassportNumber(), creds.getPassword(), ArrayList()))
         } catch (e: IOException) {
             throw RuntimeException("Could not read request$e")
