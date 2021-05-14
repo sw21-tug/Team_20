@@ -13,7 +13,7 @@ class UserRepository(private val bCryptPasswordEncoder: BCryptPasswordEncoder) {
 
     fun findByUsername(username: String): User? {
         return try {
-            users.first({ user: User -> user.getUsername() == username })
+            users.first({ user: User -> user.getPassportNumber() == username })
         } catch (e: NoSuchElementException) {
             null
         }

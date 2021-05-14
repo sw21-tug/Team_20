@@ -2,16 +2,16 @@ package at.tugraz.vaccinationpassportserver.user
 
 class User() {
 
-    private var username: String? = null
+    private var passportNumber: String? = null
     private var password: String? = null
 
     constructor(username: String, password: String) : this() {
-        this.username = username
+        this.passportNumber = username
         this.password = password
     }
 
-    fun getUsername(): String? {
-        return username
+    fun getPassportNumber(): String? {
+        return passportNumber
     }
 
     fun getPassword(): String? {
