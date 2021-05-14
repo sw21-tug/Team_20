@@ -60,7 +60,7 @@ class MyRestControllerTest {
         val expectedStatusCode = HttpStatus.FORBIDDEN
         val headers = HttpHeaders()
         val body = "{\n" +
-                "    \"username\":\"admin\",\n" +
+                "    \"passportNumber\":\"admin\",\n" +
                 "    \"password\":\"wrong\"\n" +
                 "}"
         val entity = HttpEntity<String>(body, headers)
@@ -75,7 +75,7 @@ class MyRestControllerTest {
         val expectedStatusCode = HttpStatus.OK
         val headers = HttpHeaders()
         val body = "{\n" +
-                "    \"username\":\"admin\",\n" +
+                "    \"passportNumber\":\"admin\",\n" +
                 "    \"password\":\"password\"\n" +
                 "}"
         val entity = HttpEntity<String>(body, headers)
@@ -94,7 +94,7 @@ class MyRestControllerTest {
         val expectedStatusCodePrep = HttpStatus.OK
         val headersPrep = HttpHeaders()
         val bodyPrep = "{\n" +
-                "    \"username\":\"admin\",\n" +
+                "    \"passportNumber\":\"admin\",\n" +
                 "    \"password\":\"password\"\n" +
                 "}"
         val entityPrep = HttpEntity<String>(bodyPrep, headersPrep)
