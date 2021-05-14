@@ -61,4 +61,34 @@ class UserTest {
         assertEquals("12345678", response.body?.getPassportNumber())
         assertEquals(4, response.body?.getNrOfVaccines())
     }
+
+    @Test
+    fun getOtherUserdetails_shouldBeForbidden() {
+
+        // Preparation
+        val expectedStatusCodePrep = HttpStatus.OK
+        val headersPrep = HttpHeaders()
+        val bodyPrep = "{\n" +
+                "    \"passportNumber\":\"12345678\",\n" +
+                "    \"password\":\"password\"\n" +
+                "}"
+        val entityPrep = HttpEntity<String>(bodyPrep, headersPrep)
+        val responsePrep = restTemplate.exchange(
+            "http://localhost:$port/login",
+            HttpMethod.POST, entityPrep, String::class.java)
+        assertEquals(expectedStatusCodePrep, responsePrep.statusCode)
+        val authentication = responsePrep.headers.getOrEmpty("Authorization")
+        assertTrue(authentication.isNotEmpty())
+        val bearer = authentication[0]
+
+        // Test
+        val expectedStatusCode = HttpStatus.FORBIDDEN
+        val headers = HttpHeaders()
+        headers.add("Authorization", bearer)
+        val entity = HttpEntity<String>(null, headers)
+        val response = restTemplate.exchange(
+            "http://localhost:$port/users/87654321",
+            HttpMethod.GET, entity, User::class.java)
+        assertEquals(expectedStatusCode, response.statusCode)
+    }
 }
