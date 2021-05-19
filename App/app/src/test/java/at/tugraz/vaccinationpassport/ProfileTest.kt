@@ -18,7 +18,7 @@ import org.junit.Before
 import org.junit.Test
 import java.lang.Thread.sleep
 
-class UserDummyData {
+class ProfileTest {
     var requestSuccessful: Boolean = false
     var requestFailed: Boolean = false
     var isProfileValid: Boolean = false
@@ -97,8 +97,8 @@ class UserDummyData {
 
     private fun testProfileValid(profile: ProfileData) {
         isProfileValid = profile.name == "Max Mustermann" &&
-                profile.age == 43 &&
+                profile.age == 30 &&
                 profile.passportNumber == 12345678 &&
-                profile.amountOfVaccines == 5
+                profile.amountOfVaccines == 4
     }
 }
