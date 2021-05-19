@@ -2,6 +2,7 @@ package at.tugraz.vaccinationpassport
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -122,5 +123,43 @@ class UserProfileTest
         val scenario = ActivityScenario.launch(UserProfileActivity::class.java)
         onView(withId(R.id.imPassportImage)).check(matches(isDisplayed()))
         scenario.close()
+    }
+
+    @Test
+    fun testLoginData() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.loginPassportNumber)).perform(
+            ViewActions.typeText("12345678"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.loginPassword)).perform(
+            ViewActions.typeText("password"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.loginButton)).perform(ViewActions.click())
+
+        Thread.sleep(1000)
+
+        var id = R.id.tvNameText
+        var text = "Max Mustermann"
+
+        tvTest(id, text)
+
+        id = R.id.tvPassNrText
+        text = "12345678"
+
+        tvTest(id, text)
+
+        id = R.id.tvAgeText
+        text = "30"
+
+        tvTest(id, text)
+
+        id = R.id.tvNrVacText
+        text = "4"
+
+        tvTest(id, text)
+
+        activityScenario.close()
     }
 }
