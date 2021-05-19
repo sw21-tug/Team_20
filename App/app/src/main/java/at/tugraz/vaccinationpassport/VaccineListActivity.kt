@@ -3,6 +3,7 @@ package at.tugraz.vaccinationpassport
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_vaccine_list.*
 import java.util.*
@@ -32,7 +33,21 @@ class VaccineListActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_vaccine_list)
 
+        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText) //findViewById(R.id.tvNameText) as TextView
+        val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
+        val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
+        val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
+
+        val person = listOf<String>("Max Mustermann", "25", "1234567", "5")
+
+        nameText.text = person[0]
+        ageText.text = person[1]
+        passNrText.text = person[2]
+        nrVacText.text = person[3]
+
         vaccineListAdapter = VaccineListAdapter(mutableListOf())
+        vaccineListAdapter.addVaccine(Vaccination("Covid", "05-05-2021"))
+        vaccineListAdapter.addVaccine(Vaccination("Malaria", "05-05-2021"))
         rvVaccineList.adapter = vaccineListAdapter;
     }
 }

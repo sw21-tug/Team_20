@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+
+        <ImageView
+            android:id="@+id/imPassportImage"
+            android:layout_width="96dp"
+            android:layout_height="138dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/profilepic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNameDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:text="@string/tv_name"
+            app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAgeDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/tv_age"
+            app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameDisplay" />
+
+        <TextView
+            android:id="@+id/tvPassNrDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/tv_passNr"
+            app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvAgeDisplay" />
+
+        <TextView
+            android:id="@+id/tvNrVacDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/tv_nrVac"
+            app:layout_constraintStart_toEndOf="@+id/imPassportImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvPassNrDisplay" />
+
+        <TextView
+            android:id="@+id/tvNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            app:layout_constraintStart_toEndOf="@id/tvNameDisplay"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="7dp"
+            app:layout_constraintStart_toEndOf="@id/tvAgeDisplay"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameText" />
+
+        <TextView
+            android:id="@+id/tvPassNrText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="7dp"
+            app:layout_constraintStart_toEndOf="@id/tvPassNrDisplay"
+            app:layout_constraintTop_toBottomOf="@+id/tvAgeText" />
+
+        <TextView
+            android:id="@+id/tvNrVacText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="7dp"
+            app:layout_constraintStart_toEndOf="@id/tvNrVacDisplay"
+            app:layout_constraintTop_toBottomOf="@+id/tvPassNrText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
