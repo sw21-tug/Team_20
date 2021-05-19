@@ -9,9 +9,8 @@ class Repository {
         return RetrofitInstance.api.pushLogin(loginDetails)
     }
 
-    suspend fun getProfile(): Response<ProfileData>
+    suspend fun getProfile(passportNumber: String, authToken: String): Response<ProfileData>
     {
-        // return dummy data for now -> TODO replace this with data from server
-        return Response.success( ProfileData("Max Mustermann", 43, 12345678, 5))
+        return RetrofitInstance.api.getUserProfile(passportNumber, authToken)
     }
 }

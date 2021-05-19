@@ -9,10 +9,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
+import kotlin.math.log
 
 
 class Server(private val repository: Repository) {
     private var authToken: String? = null
+    private var passportNumber: String? = null
 
     var onLoginSuccessful: () -> Unit = {}
     var onLoginFailed: (Boolean) -> Unit = {}
@@ -21,6 +23,8 @@ class Server(private val repository: Repository) {
     var onProfileRequestFailed: () -> Unit = {}
 
     fun login(loginDetails: LoginDetails) {
+        passportNumber = loginDetails.passportNumber
+
         GlobalScope.launch {
             try {
                 val response = repository.pushLogin(loginDetails)
@@ -56,16 +60,15 @@ class Server(private val repository: Repository) {
     }
 
     fun getProfile() {
-
-        // check if authentication token is valid
-        if(authToken == null)
+        // check if passportNumber and authentication token exist
+        if(authToken == null || passportNumber == null)
         {
             onProfileRequestFailed()
             return
         }
         GlobalScope.launch {
             try {
-                val response = repository.getProfile()
+                val response = repository.getProfile(passportNumber!!, authToken!!)
 
                 GlobalScope.launch(Dispatchers.Main) {
                     handleGetProfileResponse(response)
