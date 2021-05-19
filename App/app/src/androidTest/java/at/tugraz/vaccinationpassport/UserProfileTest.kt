@@ -141,24 +141,16 @@ class UserProfileTest
         Thread.sleep(1000)
 
         var id = R.id.tvNameText
-        var text = "Max Mustermann"
-
-        tvTest(id, text)
+        onView(withId(id)).check(matches(withText("Max Mustermann")))
 
         id = R.id.tvPassNrText
-        text = "12345678"
-
-        tvTest(id, text)
+        onView(withId(id)).check(matches(withText("12345678")))
 
         id = R.id.tvAgeText
-        text = "30"
-
-        tvTest(id, text)
+        onView(withId(id)).check(matches(withText("30")))
 
         id = R.id.tvNrVacText
-        text = "4"
-
-        tvTest(id, text)
+        onView(withId(id)).check(matches(withText("4")))
 
         activityScenario.close()
     }
