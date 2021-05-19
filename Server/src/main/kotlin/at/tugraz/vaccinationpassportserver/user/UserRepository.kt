@@ -9,6 +9,8 @@ class UserRepository(private val bCryptPasswordEncoder: BCryptPasswordEncoder) {
     init {
         users.add(User("admin", bCryptPasswordEncoder.encode("password"), 20, "Admin", 0))
         users.add(User("12345678", bCryptPasswordEncoder.encode("password"), 30, "Max Mustermann", 4))
+        users[1].addVaccine(Vaccine("Covid", "21-01-2021"))
+        users[1].addVaccine(Vaccine("FSME", "29-05-2015"))
     }
 
     fun findByPassportNumber(passportNumber: String): User? {

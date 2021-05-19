@@ -12,12 +12,16 @@ class User() {
     private var name: String? = null
     private var nrOfVaccines: Int? = null
 
+    @JsonIgnore
+    private var vaccines: MutableList<Vaccine>? = null
+
     constructor(passportNumber: String, password: String, age: Int, name: String, nrOfVaccines: Int) : this() {
         this.passportNumber = passportNumber
         this.password = password
         this.age = age
         this.name = name
         this.nrOfVaccines = nrOfVaccines
+        this.vaccines = mutableListOf<Vaccine>()
     }
 
     fun getPassportNumber(): String? {
@@ -42,5 +46,15 @@ class User() {
 
     fun getNrOfVaccines(): Int? {
         return this.nrOfVaccines
+    }
+
+    fun getVaccines() : MutableList<Vaccine>?
+    {
+        return vaccines
+    }
+
+    fun addVaccine(vaccine : Vaccine)
+    {
+        this.vaccines?.add(vaccine)
     }
 }
