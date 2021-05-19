@@ -1,10 +1,9 @@
 package at.tugraz.vaccinationpassportserver.user
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.HttpClientErrorException
+import java.security.Principal
 
 @RestController
 @RequestMapping("/users")
@@ -15,4 +14,13 @@ class UserController(private val userRepository: UserRepository, private val bCr
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()))
         userRepository.save(user)
     }
+
+    @GetMapping("/{passportNumber}")
+    fun getUserDetails(principal: Principal, @PathVariable passportNumber: String): User? {
+        if(principal.name != passportNumber)
+            throw org.springframework.security.access.AccessDeniedException("403 returned")
+
+        return userRepository.findByPassportNumber(passportNumber)
+    }
 }
+

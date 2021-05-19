@@ -11,8 +11,8 @@ class UserDetailsServiceImpl(userRepository: UserRepository) : UserDetailsServic
     private val userRepository: UserRepository = userRepository
 
     override fun loadUserByUsername(username: String): UserDetails {
-        val user: User = userRepository.findByUsername(username)
+        val user: User = userRepository.findByPassportNumber(username)
                 ?: throw UsernameNotFoundException(username)
-        return org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.emptyList())
+        return org.springframework.security.core.userdetails.User(user.getPassportNumber(), user.getPassword(), Collections.emptyList())
     }
 }
