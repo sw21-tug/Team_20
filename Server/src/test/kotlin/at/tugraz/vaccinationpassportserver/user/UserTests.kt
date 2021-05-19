@@ -151,10 +151,12 @@ class UserTest {
         val entity = HttpEntity<String>(null, headers)
         val response = restTemplate.exchange(
                 "http://localhost:$port/users/12345678/vaccines",
-                HttpMethod.GET, entity, List::class.java)
+                HttpMethod.GET, entity, MutableList::class.java)
 
         assertEquals(expectedStatusCode, response.statusCode)
-        assertEquals(Vaccine("Corona", "21-01-2021"), response.body?.get(0))
-        assertEquals(Vaccine("FSME", "29-05-2015"), response.body?.get(1))
+        assertEquals(Vaccine("Covid", "21-01-2021"),
+                Vaccine.from(response.body?.get(0) as Map<String, String>))
+        assertEquals(Vaccine("FSME", "29-05-2015"),
+                Vaccine.from(response.body?.get(1) as Map<String, String>))
     }
 }
