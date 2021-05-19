@@ -1,6 +1,8 @@
 package at.tugraz.vaccinationpassport.backend
 
 
+import android.os.Parcel
+import android.os.Parcelable
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
@@ -12,7 +14,7 @@ import java.lang.Exception
 import kotlin.math.log
 
 
-class Server(private val repository: Repository) {
+class Server(private val repository: Repository) : Parcelable {
     private var authToken: String? = null
     private var passportNumber: String? = null
 
@@ -78,6 +80,33 @@ class Server(private val repository: Repository) {
                     onProfileRequestFailed()
                 }
             }
+        }
+    }
+
+    // Parcelable implementation:
+
+    constructor(parcel: Parcel) : this(parcel.readParcelable<Repository>(Server::class.java.classLoader)!!) {
+        authToken = parcel.readString()
+        passportNumber = parcel.readString()
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(repository, flags)
+        parcel.writeString(authToken)
+        parcel.writeString(passportNumber)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Server> {
+        override fun createFromParcel(parcel: Parcel): Server {
+            return Server(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Server?> {
+            return arrayOfNulls(size)
         }
     }
 }

@@ -5,13 +5,19 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import at.tugraz.vaccinationpassport.backend.Server
+import at.tugraz.vaccinationpassport.backend.api.Repository
+import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
 import java.util.*
 
 
 class UserProfileActivity : AppCompatActivity() {
+
+    private lateinit var server: Server
 
     fun setLocale(languageCode: String?) {
         val locale = Locale(languageCode)
@@ -32,20 +38,18 @@ class UserProfileActivity : AppCompatActivity() {
         else {
             setLocale("en")
         }
+        val tempServer = intent.extras?.get("Server")
+        if (tempServer != null) {
+            server = tempServer as Server
+            server.onProfileReceived = ::setProfileData
+            server.onProfileRequestFailed = { Log.w("Client-Server", "Profile Request failed") }
+            server.getProfile()
+        } else {
+            Log.w("Intent", "The server was not passed to the new Activity")
+            server = Server(Repository())
+        }
 
         setContentView(R.layout.activity_user_profile)
-
-        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText) //findViewById(R.id.tvNameText) as TextView
-        val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
-        val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
-        val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
-
-        val person = listOf<String>("Max Mustermann", "25", "1234567", "5")
-
-        nameText.text = person[0]
-        ageText.text = person[1]
-        passNrText.text = person[2]
-        nrVacText.text = person[3]
     }
 
     fun showingVacList(view: View) {
@@ -53,5 +57,17 @@ class UserProfileActivity : AppCompatActivity() {
         val intent = Intent(this, VaccineListActivity::class.java)
         intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
         startActivity(intent)
+    }
+
+    private fun setProfileData(profile: ProfileData) {
+        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText)
+        val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
+        val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
+        val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
+
+        nameText.text = profile.name
+        ageText.text = profile.age.toString()
+        passNrText.text = profile.passportNumber.toString()
+        nrVacText.text = profile.nrOfVaccines.toString()
     }
 }

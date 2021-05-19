@@ -130,6 +130,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Switch to other activity
         val intent = Intent(this, UserProfileActivity::class.java)
         intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
+        intent.putExtra("Server", server)
         startActivity(intent)
     }
 
