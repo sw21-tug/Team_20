@@ -22,5 +22,14 @@ class UserController(private val userRepository: UserRepository, private val bCr
 
         return userRepository.findByPassportNumber(passportNumber)
     }
+
+    @GetMapping("/{passportNumber}/vaccines")
+    fun getUserVaccines(principal: Principal, @PathVariable passportNumber: String): MutableList<Vaccine>? {
+        if(principal.name != passportNumber)
+            throw org.springframework.security.access.AccessDeniedException("403 returned")
+
+        var user = userRepository.findByPassportNumber(passportNumber)
+        return user?.getVaccines()
+    }
 }
 

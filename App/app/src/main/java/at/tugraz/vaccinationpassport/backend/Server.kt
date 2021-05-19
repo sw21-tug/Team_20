@@ -3,6 +3,7 @@ package at.tugraz.vaccinationpassport.backend
 
 import android.os.Parcel
 import android.os.Parcelable
+import at.tugraz.vaccinationpassport.Vaccination
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
@@ -11,7 +12,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
-import kotlin.math.log
 
 
 class Server(private val repository: Repository) : Parcelable {
@@ -23,6 +23,9 @@ class Server(private val repository: Repository) : Parcelable {
 
     var onProfileReceived: (ProfileData) -> Unit = {}
     var onProfileRequestFailed: () -> Unit = {}
+
+    var onVaccineListReceived: (List<Vaccination>) -> Unit = {}
+    var onVaccineListRequestFailed: () -> Unit = {}
 
     fun login(loginDetails: LoginDetails) {
         passportNumber = loginDetails.passportNumber
@@ -82,6 +85,40 @@ class Server(private val repository: Repository) : Parcelable {
             }
         }
     }
+
+    fun getVaccineList() {
+
+        // check if authentication token is valid
+        if(authToken == null)
+        {
+            onVaccineListRequestFailed()
+            return
+        }
+
+        GlobalScope.launch {
+            try {
+                val response = repository.getVaccineList(authToken!!)
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    handleVaccineListResponse(response)
+                }
+            } catch (e: Exception) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    onVaccineListRequestFailed()
+                }
+            }
+        }
+    }
+
+    private fun handleVaccineListResponse(response: Response<List<Vaccination>>) {
+        if (!response.isSuccessful) {
+            onVaccineListRequestFailed()
+            return
+        }
+
+        onVaccineListReceived(response.body()!!)
+    }
+
 
     // Parcelable implementation:
 
