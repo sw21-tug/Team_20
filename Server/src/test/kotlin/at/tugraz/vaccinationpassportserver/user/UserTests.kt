@@ -2,6 +2,7 @@ package at.tugraz.vaccinationpassportserver.security
 
 import at.tugraz.vaccinationpassportserver.VaccinationPassportServerApplication
 import at.tugraz.vaccinationpassportserver.user.User
+import at.tugraz.vaccinationpassportserver.user.Vaccine
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -122,5 +123,38 @@ class UserTest {
         assertEquals(expectedStatusCode, response.statusCode)
 
         assertEquals(null, response.body?.getPassword())
+    }
+
+    @Test
+    fun getOwnVaccineList_shouldBeOK() {
+
+        // Preparation
+        val expectedStatusCodePrep = HttpStatus.OK
+        val headersPrep = HttpHeaders()
+        val bodyPrep = "{\n" +
+                "    \"passportNumber\":\"12345678\",\n" +
+                "    \"password\":\"password\"\n" +
+                "}"
+        val entityPrep = HttpEntity<String>(bodyPrep, headersPrep)
+        val responsePrep = restTemplate.exchange(
+                "http://localhost:$port/login",
+                HttpMethod.POST, entityPrep, String::class.java)
+        assertEquals(expectedStatusCodePrep, responsePrep.statusCode)
+        val authentication = responsePrep.headers.getOrEmpty("Authorization")
+        assertTrue(authentication.isNotEmpty())
+        val bearer = authentication[0]
+
+        // Test
+        val expectedStatusCode = HttpStatus.OK
+        val headers = HttpHeaders()
+        headers.add("Authorization", bearer)
+        val entity = HttpEntity<String>(null, headers)
+        val response = restTemplate.exchange(
+                "http://localhost:$port/users/12345678/vaccines",
+                HttpMethod.GET, entity, List::class.java)
+
+        assertEquals(expectedStatusCode, response.statusCode)
+        assertEquals(Vaccine("Corona", "21-01-2021"), response.body?.get(0))
+        assertEquals(Vaccine("FSME", "29-05-2015"), response.body?.get(1))
     }
 }
