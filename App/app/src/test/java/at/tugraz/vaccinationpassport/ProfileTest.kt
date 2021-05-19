@@ -99,6 +99,6 @@ class ProfileTest {
         isProfileValid = profile.name == "Max Mustermann" &&
                 profile.age == 30 &&
                 profile.passportNumber == 12345678 &&
-                profile.amountOfVaccines == 4
+                profile.nrOfVaccines == 4
     }
 }
