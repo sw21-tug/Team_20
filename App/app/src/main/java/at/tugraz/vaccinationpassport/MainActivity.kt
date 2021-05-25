@@ -35,8 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = this.intent
-        val language = intent.extras?.get(resources.getString(R.string.language_key))
+        val language = this.intent.extras?.get(resources.getString(R.string.language_key))
         if (language != null) {
             setLocale(language as String?)
         }
