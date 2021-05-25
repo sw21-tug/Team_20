@@ -8,30 +8,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import at.tugraz.vaccinationpassport.utils.changeLocale
 import java.util.*
 
 
 class UserProfileActivity : AppCompatActivity() {
 
-    fun setLocale(languageCode: String?) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val resources: Resources = this.resources
-        val config: Configuration = resources.getConfiguration()
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.getDisplayMetrics())
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val intent = this.intent
+
         val language = intent.extras?.get(resources.getString(R.string.language_key))
-        if (language != null) {
-            setLocale(language as String?)
-        }
-        else {
-            setLocale("en")
-        }
+        changeLocale(language as String?, "en", this.resources)
 
         setContentView(R.layout.activity_user_profile)
 
