@@ -23,7 +23,7 @@ class DocAddActivityTest{
         onView(withId(R.id.PassportNumber)).check(matches(isDisplayed()))
         onView(withId(R.id.vaccinesName)).check(matches(isDisplayed()))
         onView(withId(R.id.vaccinesDate)).check(matches(isDisplayed()))
-        onView(withId(R.id.vaccineTime)).check(matches(isDisplayed()))
+        onView(withId(R.id.vaccinesTime)).check(matches(isDisplayed()))
 
         onView(withId(R.id.addVacButton)).check(matches(isDisplayed()));
 

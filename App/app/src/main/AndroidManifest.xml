@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VaccinationPassport">
+        <activity android:name=".DocAddActivity"></activity>
         <activity android:name=".VaccineListActivity"></activity>
         <activity android:name=".UserProfileActivity"></activity>
         <activity android:name=".MainActivity">
