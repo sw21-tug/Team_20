@@ -159,4 +159,89 @@ class UserTest {
         assertEquals(Vaccine("FSME", "29-05-2015"),
                 Vaccine.from(response.body?.get(1) as Map<String, String>))
     }
+
+    fun loginAsUser_shouldBeOK() : String?
+    {
+        // Preparation
+        val expectedStatusCodePrep = HttpStatus.OK
+        val headersPrep = HttpHeaders()
+        val bodyPrep = "{\n" +
+                "    \"passportNumber\":\"12345678\",\n" +
+                "    \"password\":\"password\"\n" +
+                "}"
+        val entityPrep = HttpEntity<String>(bodyPrep, headersPrep)
+        val responsePrep = restTemplate.exchange(
+                "http://localhost:$port/login",
+                HttpMethod.POST, entityPrep, String::class.java)
+        assertEquals(expectedStatusCodePrep, responsePrep.statusCode)
+        val authentication = responsePrep.headers.getOrEmpty("Authorization")
+        assertTrue(authentication.isNotEmpty())
+
+        return authentication[0]
+    }
+
+    fun userHasVaccine(vaccine: Vaccine, bearer: String?)
+    {
+        val expectedStatusCode = HttpStatus.OK
+        val headers = HttpHeaders()
+        headers.add("Authorization", bearer)
+        val entity = HttpEntity<String>(null, headers)
+        val response = restTemplate.exchange(
+                "http://localhost:$port/users/12345678/vaccines",
+                HttpMethod.GET, entity, MutableList::class.java)
+
+        var found : Boolean = false
+
+        for (b in response.getBody()!!)
+        {
+            val v = Vaccine.from(b as Map<String, String>)
+
+            if(v.name == vaccine.name && v.date == vaccine.date)
+            {
+                found = true
+            }
+        }
+
+        assertEquals(found, true)
+    }
+
+    @Test
+    fun AddToVaccineList_shouldBeOK() {
+        //login as doctor
+        val expectedStatusCodePrep = HttpStatus.OK
+        val headersPrep = HttpHeaders()
+        val bodyPrep = "{\n" +
+                "    \"passportNumber\":\"11223344\",\n" +
+                "    \"password\":\"password\"\n" +
+                "}"
+        val entityPrep = HttpEntity<String>(bodyPrep, headersPrep)
+        val responsePrep = restTemplate.exchange(
+                "http://localhost:$port/login",
+                HttpMethod.POST, entityPrep, String::class.java)
+        assertEquals(expectedStatusCodePrep, responsePrep.statusCode)
+        val authentication = responsePrep.headers.getOrEmpty("Authorization")
+        assertTrue(authentication.isNotEmpty())
+        val bearer = authentication[0]
+
+        //add vaccine to user
+        val expectedStatusCode = HttpStatus.OK
+        val headers = HttpHeaders()
+        headers.add("Authorization", bearer)
+        val body = "{\n" +
+                "    \"passportNumber\":\"12345678\",\n"
+                "    \"name\":\"Common Cold\",\n" +
+                "    \"date\":\"26.05.2021\"\n" +
+                "}"
+        val entity = HttpEntity<String>(body, headers)
+        val response = restTemplate.exchange(
+                "http://localhost:$port/users/11223344/add-vaccine",
+                HttpMethod.POST, entity, MutableList::class.java)
+        assertEquals(expectedStatusCode, response.statusCode)
+
+        //login as user
+        val userBearer = loginAsUser_shouldBeOK()
+
+        //check if user has vaccine
+        userHasVaccine(Vaccine("Common Cold", "26.05.2021"), userBearer)
+    }
 }
