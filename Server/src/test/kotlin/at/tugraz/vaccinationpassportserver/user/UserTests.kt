@@ -3,6 +3,7 @@ package at.tugraz.vaccinationpassportserver.security
 import at.tugraz.vaccinationpassportserver.VaccinationPassportServerApplication
 import at.tugraz.vaccinationpassportserver.user.User
 import at.tugraz.vaccinationpassportserver.user.Vaccine
+import at.tugraz.vaccinationpassportserver.user.VaccineHolder
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

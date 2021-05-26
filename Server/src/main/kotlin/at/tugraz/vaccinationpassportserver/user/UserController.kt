@@ -31,5 +31,16 @@ class UserController(private val userRepository: UserRepository, private val bCr
         var user = userRepository.findByPassportNumber(passportNumber)
         return user?.getVaccines()
     }
+
+    @PostMapping("/{passportNumber}/add-vaccine")
+    fun addUserVaccine(principal: Principal, @PathVariable passportNumber: String, @RequestBody vaccineHolder: VaccineHolder): Boolean {
+        if(principal.name != passportNumber)
+            throw org.springframework.security.access.AccessDeniedException("403 returned")
+
+        val user: User = userRepository.findByPassportNumber(vaccineHolder.passportNumber) ?: return false
+
+        user.addVaccine(vaccineHolder.vaccine)
+        return true
+    }
 }
 
