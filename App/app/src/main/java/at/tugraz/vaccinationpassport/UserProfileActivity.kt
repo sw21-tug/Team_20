@@ -16,24 +16,16 @@ class UserProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = this.intent
 
-        val language = intent.extras?.get(resources.getString(R.string.language_key))
+        val language = this.intent.extras?.get(resources.getString(R.string.language_key))
         changeLocale(language as String?, "en", this.resources)
 
         setContentView(R.layout.activity_user_profile)
 
-        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText) //findViewById(R.id.tvNameText) as TextView
-        val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
-        val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
-        val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
-
-        val person = listOf<String>("Max Mustermann", "25", "1234567", "5")
-
-        nameText.text = person[0]
-        ageText.text = person[1]
-        passNrText.text = person[2]
-        nrVacText.text = person[3]
+        findViewById<TextView>(R.id.tvNameText).text = "Max Mustermann"
+        findViewById<TextView>(R.id.tvAgeText).text = "25"
+        findViewById<TextView>(R.id.tvPassNrText).text = "1234567"
+        findViewById<TextView>(R.id.tvNrVacText).text = "5"
     }
 
     fun showingVacList(view: View) {
@@ -42,4 +34,5 @@ class UserProfileActivity : AppCompatActivity() {
         intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
         startActivity(intent)
     }
+
 }
