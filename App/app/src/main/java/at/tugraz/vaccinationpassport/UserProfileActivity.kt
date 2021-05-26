@@ -1,9 +1,6 @@
 package at.tugraz.vaccinationpassport
 
-import android.app.Activity
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,32 +9,20 @@ import androidx.appcompat.app.AppCompatActivity
 import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
-import java.util.*
+import at.tugraz.vaccinationpassport.utils.changeLocale
 
 
 class UserProfileActivity : AppCompatActivity() {
 
     private lateinit var server: Server
 
-    fun setLocale(languageCode: String?) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val resources: Resources = this.resources
-        val config: Configuration = resources.getConfiguration()
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.getDisplayMetrics())
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = this.intent
-        val language = intent.extras?.get(resources.getString(R.string.language_key))
-        if (language != null) {
-            setLocale(language as String?)
-        }
-        else {
-            setLocale("en")
-        }
+
+        val language = this.intent.extras?.get(resources.getString(R.string.language_key))
+        changeLocale(language as String?, "en", this.resources)
+
         val tempServer = intent.extras?.get("Server")
         if (tempServer != null) {
             server = tempServer as Server
