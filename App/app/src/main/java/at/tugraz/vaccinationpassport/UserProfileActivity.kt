@@ -1,18 +1,21 @@
 package at.tugraz.vaccinationpassport
 
-import android.app.Activity
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import at.tugraz.vaccinationpassport.backend.Server
+import at.tugraz.vaccinationpassport.backend.api.Repository
+import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
 import at.tugraz.vaccinationpassport.utils.changeLocale
-import java.util.*
 
 
 class UserProfileActivity : AppCompatActivity() {
+
+    private lateinit var server: Server
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +23,18 @@ class UserProfileActivity : AppCompatActivity() {
         val language = this.intent.extras?.get(resources.getString(R.string.language_key))
         changeLocale(language as String?, "en", this.resources)
 
-        setContentView(R.layout.activity_user_profile)
+        val tempServer = intent.extras?.get("Server")
+        if (tempServer != null) {
+            server = tempServer as Server
+            server.onProfileReceived = ::setProfileData
+            server.onProfileRequestFailed = { Log.w("Client-Server", "Profile Request failed") }
+            server.getProfile()
+        } else {
+            Log.w("Intent", "The server was not passed to the new Activity")
+            server = Server(Repository())
+        }
 
-        findViewById<TextView>(R.id.tvNameText).text = "Max Mustermann"
-        findViewById<TextView>(R.id.tvAgeText).text = "25"
-        findViewById<TextView>(R.id.tvPassNrText).text = "1234567"
-        findViewById<TextView>(R.id.tvNrVacText).text = "5"
+        setContentView(R.layout.activity_user_profile)
     }
 
     fun showingVacList(view: View) {
@@ -35,4 +44,15 @@ class UserProfileActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun setProfileData(profile: ProfileData) {
+        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText)
+        val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
+        val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
+        val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
+
+        nameText.text = profile.name
+        ageText.text = profile.age.toString()
+        passNrText.text = profile.passportNumber.toString()
+        nrVacText.text = profile.nrOfVaccines.toString()
+    }
 }

@@ -4,5 +4,5 @@ data class ProfileData (
     val name: String,
     val age: Int,
     val passportNumber: Int,
-    val amountOfVaccines: Int
+    val nrOfVaccines: Int
 )
