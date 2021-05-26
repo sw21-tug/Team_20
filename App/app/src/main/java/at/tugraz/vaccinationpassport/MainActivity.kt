@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import at.tugraz.vaccinationpassport.utils.changeLocale
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val server = Server(Repository())
     lateinit var toggle : ActionBarDrawerToggle
 
+    /*
     fun setLocale(languageCode: String?) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
@@ -33,15 +35,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         resources.updateConfiguration(config, resources.getDisplayMetrics())
     }
 
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val language = this.intent.extras?.get(resources.getString(R.string.language_key))
-        if (language != null) {
-            setLocale(language as String?)
-        }
-        else {
-            setLocale("en")
-        }
+        changeLocale(language as String?, "en", this.resources)
 
         setContentView(R.layout.activity_main)
         val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
