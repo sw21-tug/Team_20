@@ -227,15 +227,20 @@ class UserTest {
         val expectedStatusCode = HttpStatus.OK
         val headers = HttpHeaders()
         headers.add("Authorization", bearer)
-        val body = "{\n" +
+        /*val body = "{\n" +
                 "    \"passportNumber\":\"12345678\",\n"
-                "    \"name\":\"Common Cold\",\n" +
-                "    \"date\":\"26.05.2021\"\n" +
-                "}"
-        val entity = HttpEntity<String>(body, headers)
+                "    \"vaccine\":\n" +
+                "    {\n" +
+                "        \"name\":\"Common Cold\",\n" +
+                "        \"date\":\"26.05.2021\"\n" +
+                "    }\n" +
+                "}"*/
+        val body = VaccineHolder("12345678", Vaccine("Common Cold", "26.05.2021"))
+        val entity = HttpEntity<VaccineHolder>(body, headers)
+        //val entity = HttpEntity<String>(body, headers)
         val response = restTemplate.exchange(
                 "http://localhost:$port/users/11223344/add-vaccine",
-                HttpMethod.POST, entity, MutableList::class.java)
+                HttpMethod.POST, entity, Boolean::class.java)
         assertEquals(expectedStatusCode, response.statusCode)
 
         //login as user
