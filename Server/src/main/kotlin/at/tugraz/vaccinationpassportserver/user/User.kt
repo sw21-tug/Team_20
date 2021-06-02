@@ -13,15 +13,19 @@ class User() {
     private var nrOfVaccines: Int? = null
 
     @JsonIgnore
+    private var isDoctor: Boolean? = null
+
+    @JsonIgnore
     private var vaccines: MutableList<Vaccine>? = null
 
-    constructor(passportNumber: String, password: String, age: Int, name: String, nrOfVaccines: Int) : this() {
+    constructor(passportNumber: String, password: String, age: Int, name: String, nrOfVaccines: Int, isDoctor: Boolean) : this() {
         this.passportNumber = passportNumber
         this.password = password
         this.age = age
         this.name = name
         this.nrOfVaccines = nrOfVaccines
         this.vaccines = mutableListOf<Vaccine>()
+        this.isDoctor = isDoctor
     }
 
     fun getPassportNumber(): String? {
@@ -51,6 +55,10 @@ class User() {
     fun getVaccines() : MutableList<Vaccine>?
     {
         return vaccines
+    }
+    fun isDoctor() : Boolean?
+    {
+        return isDoctor
     }
 
     fun addVaccine(vaccine : Vaccine)
