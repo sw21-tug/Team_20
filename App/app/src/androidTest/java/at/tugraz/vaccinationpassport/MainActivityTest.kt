@@ -82,5 +82,18 @@ class MainActivityTest{
             .check(matches(withText("Registering is not Implemented")));
         activityScenario.close()
     }
+
+    @Test
+    fun LoginDocIsSuccesfull() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.loginPassportNumber)).perform(typeText("11223344"), closeSoftKeyboard())
+        onView(withId(R.id.loginPassword)).perform(typeText("password"), closeSoftKeyboard())
+        onView(withId(R.id.loginButton)).perform(click())
+
+        sleep(1000)
+
+        onView(withId(R.id.addVacTitle)).check(matches(isDisplayed()));
+        activityScenario.close()
+    }
 }
 
