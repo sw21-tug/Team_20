@@ -22,4 +22,10 @@
     <string name="invalid_login_details">Invalid Passport Number / Password</string>
     <string name="could_not_connect_to_server">Could not connect to the server</string>
     <string name="registering_not_implemented">Registering is not Implemented</string>
+
+    <string name="addVacTitle">Add Vaccine</string>
+    <string name="vacNameHint">Vaccine Name</string>
+    <string name="vacDateHint">Date: dd.mm.yyyy</string>
+    <string name="vacTimeHint">Time: hh:mm</string>
+    <string name="addButton">Add</string>
 </resources>
