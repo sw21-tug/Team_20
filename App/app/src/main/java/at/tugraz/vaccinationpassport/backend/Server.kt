@@ -18,7 +18,7 @@ class Server(private val repository: Repository) : Parcelable {
     private var authToken: String? = null
     private var passportNumber: String? = null
 
-    var onLoginSuccessful: () -> Unit = {}
+    var onLoginSuccessful: (Boolean) -> Unit = {}
     var onLoginFailed: (Boolean) -> Unit = {}
 
     var onProfileReceived: (ProfileData) -> Unit = {}
@@ -52,7 +52,9 @@ class Server(private val repository: Repository) : Parcelable {
         }
 
         authToken = response.headers()["Authorization"]!!
-        onLoginSuccessful()
+        val isDoctor = response.headers()["isDoctor"].toBoolean()
+
+        onLoginSuccessful(isDoctor)
     }
 
     private fun handleGetProfileResponse(response: Response<ProfileData>) {

@@ -4,10 +4,13 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import at.tugraz.vaccinationpassport.backend.Server
+import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.utils.changeLocale
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_doctor_adds_vaccines.*
@@ -16,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class DocAddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var server: Server
     lateinit var toggle : ActionBarDrawerToggle
 
 
@@ -24,6 +28,8 @@ class DocAddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         val language = this.intent.extras?.get(resources.getString(R.string.language_key))
         changeLocale(language as String?, "en", this.resources)
+
+        setServer()
 
         setContentView(R.layout.activity_doctor_adds_vaccines)
         val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
@@ -42,6 +48,16 @@ class DocAddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.setNavigationItemSelectedListener(this)
         navigationView.bringToFront()
+    }
+
+    private fun setServer() {
+        val tempServer = intent.extras?.get("Server")
+        server = if (tempServer != null) {
+            tempServer as Server
+        } else {
+            Log.w("Intent", "The server was not passed to the new Activity")
+            Server(Repository())
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
