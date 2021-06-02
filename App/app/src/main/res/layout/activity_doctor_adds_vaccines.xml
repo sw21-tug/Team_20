@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/vacNameHint"
-            android:inputType="textPassword"
+            android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/vaccinesDate"
             app:layout_constraintTop_toBottomOf="@+id/PassportNumber" />
 
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/vacTimeHint"
-            android:inputType="datetime"
+            android:inputType="time"
             app:layout_constraintBottom_toTopOf="@+id/addVacButton"
             app:layout_constraintTop_toBottomOf="@+id/vaccinesDate" />
 
