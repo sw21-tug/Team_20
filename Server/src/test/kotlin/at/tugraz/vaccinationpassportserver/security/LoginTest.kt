@@ -71,7 +71,7 @@ class MyRestControllerTest {
     }
 
     @Test
-    fun loginWithValidCredentials_shouldBeOK() {
+    fun loginUserWithValidCredentials_shouldBeOK() {
         val expectedStatusCode = HttpStatus.OK
         val headers = HttpHeaders()
         val body = "{\n" +
@@ -85,6 +85,34 @@ class MyRestControllerTest {
         assertEquals(expectedStatusCode, response.statusCode)
         val authentication = response.headers.getOrEmpty("Authorization")
         assertTrue(authentication.isNotEmpty())
+
+        val isDoctor = response.headers.getOrEmpty("isDoctor")
+        assertTrue(isDoctor.isNotEmpty())
+        assertEquals(1, isDoctor.size)
+        assertFalse(isDoctor[0].toBoolean())
+    }
+
+    @Test
+    fun loginDoctorWithValidCredentials_shouldBeOK() {
+        val expectedStatusCode = HttpStatus.OK
+        val headers = HttpHeaders()
+        val body = "{\n" +
+                "    \"passportNumber\":\"11223344\",\n" +
+                "    \"password\":\"password\"\n" +
+                "}"
+        val entity = HttpEntity<String>(body, headers)
+        val response = restTemplate.exchange(
+            "http://localhost:$port/login",
+            HttpMethod.POST, entity, String::class.java)
+        assertEquals(expectedStatusCode, response.statusCode)
+
+        val authentication = response.headers.getOrEmpty("Authorization")
+        assertTrue(authentication.isNotEmpty())
+
+        val isDoctor = response.headers.getOrEmpty("isDoctor")
+        assertTrue(isDoctor.isNotEmpty())
+        assertEquals(1, isDoctor.size)
+        assertTrue(isDoctor[0].toBoolean())
     }
 
     @Test
