@@ -1,13 +1,18 @@
 package at.tugraz.vaccinationpassport
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import it.xabaras.android.espresso.recyclerviewchildactions.RecyclerViewChildActions.Companion.childOfViewAtPositionWithMatcher
+import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.Description
+import org.hamcrest.Matcher
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -63,15 +68,14 @@ class VaccineListActivityTest
         checkLabel(R.id.tvNameText, "Max Mustermann")
         checkLabel(R.id.tvAgeText, "30")
         checkLabel(R.id.tvPassNrText, "12345678")
-        checkLabel(R.id.tvNrVacText, "2")
 
         onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineName,
                 0, withText("Vaccine Nr. 0"))))
 
         onView(withId(R.id.rvVaccineList))
-                .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccinationDate,
-        0, withText("2021-01-01"))))
+            .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineDate,
+                0, withText("2021-01-01"))))
 
         scenario.close()
     }
