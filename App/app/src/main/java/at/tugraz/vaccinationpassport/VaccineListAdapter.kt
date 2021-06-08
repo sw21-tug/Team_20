@@ -41,4 +41,13 @@ class VaccineListAdapter(
         vaccines.add(vaccine)
         notifyItemInserted(vaccines.size - 1)
     }
+
+    fun addVaccines(vaccines_list: List<Vaccination>){
+        for (vaccine in vaccines_list)
+        {
+            vaccines.add(vaccine)
+            notifyItemInserted(vaccines.size - 1)
+        }
+
+    }
 }
