@@ -2,8 +2,6 @@ package at.tugraz.vaccinationpassport
 
 
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -19,7 +17,6 @@ import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.utils.changeLocale
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val server = Server(Repository())
@@ -121,13 +118,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return LoginDetails(passportNumber, passwordString)
     }
 
-    private fun onLoginSuccessful() {
+    private fun onLoginSuccessful(isDoctor: Boolean) {
         val password = findViewById<EditText>(R.id.loginPassword)
         password.setText("")
 
         val language = this.intent.extras?.getString(resources.getString(R.string.language_key))
         // Switch to other activity
-        val intent = Intent(this, UserProfileActivity::class.java)
+        val intent = if (isDoctor) {
+            Intent(this, DocAddActivity::class.java)
+        } else {
+            Intent(this, UserProfileActivity::class.java)
+        }
         intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
         intent.putExtra("Server", server)
         startActivity(intent)

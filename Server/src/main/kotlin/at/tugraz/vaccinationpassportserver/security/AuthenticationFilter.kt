@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import java.io.IOException
 import java.util.*
@@ -31,6 +32,9 @@ class AuthenticationFilter(authenticationManager: AuthenticationManager?) : User
                 .signWith(secretKey)
                 .compact()
         response.addHeader("Authorization", "Bearer $token")
+        val user = authentication.principal as org.springframework.security.core.userdetails.User
+        val doctor = user.authorities.contains(GrantedAuthority { "doctor" })
+        response.addHeader("isDoctor", doctor.toString())
     }
 
     init {
