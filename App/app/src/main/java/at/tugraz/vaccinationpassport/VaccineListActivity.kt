@@ -1,15 +1,23 @@
 package at.tugraz.vaccinationpassport
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_vaccine_list.*
+import kotlinx.android.synthetic.main.activity_vaccine_list.toolbar
 import java.util.*
 
-class VaccineListActivity : AppCompatActivity() {
+class VaccineListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var vaccineListAdapter : VaccineListAdapter
+    lateinit var toggle : ActionBarDrawerToggle
 
     fun setLocale(languageCode: String?) {
         val locale = Locale(languageCode)
@@ -49,5 +57,38 @@ class VaccineListActivity : AppCompatActivity() {
         vaccineListAdapter.addVaccine(Vaccination("Covid", "05-05-2021"))
         vaccineListAdapter.addVaccine(Vaccination("Malaria", "05-05-2021"))
         rvVaccineList.adapter = vaccineListAdapter;
+
+        val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
+        // set the toolbar as action bar
+        setSupportActionBar(toolbar)
+
+        toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+
+        toggle.isDrawerIndicatorEnabled = true
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+        val navigationView: NavigationView = findViewById(R.id.navigationView)
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.bringToFront()
+    }
+
+    private fun changeLanguage(language: String) {
+        val intent = Intent(applicationContext, VaccineListActivity::class.java)
+        intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
+        startActivity(intent)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.btn_language_ru) {
+            changeLanguage("ru")
+        }
+        if (item.itemId == R.id.btn_language_en) {
+            changeLanguage("en")
+        }
+        return true
     }
 }
