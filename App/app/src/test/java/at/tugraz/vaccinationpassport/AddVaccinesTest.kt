@@ -44,11 +44,10 @@ class AddVaccinesTest {
 
     @Test
     fun loginDoctorAddVac() {
-        System.out.println("Started")
         var server = Server(Repository())
         val loginDetailsDoctor = LoginDetails("11223344", "password")
         server.login(loginDetailsDoctor)
-        sleep(500)
+        sleep(1000)
 
         server.onVaccineAdded = {
             isVaccineAdded = true
@@ -60,12 +59,12 @@ class AddVaccinesTest {
         val vaccination = Vaccination("Common Cold", "26.05.2021 11:11")
         val vacDetails = VaccineDetails("12345678", vaccination)
         server.addVaccine(vacDetails)
-        sleep(500)
+        sleep(1000)
 
         server = Server(Repository())
         val loginDetailsUser = LoginDetails("12345678", "password")
         server.login(loginDetailsUser)
-        sleep(500)
+        sleep(1000)
 
         server.onVaccineListReceived = { vaccine_list ->
             vaccineListReceived = true
@@ -73,7 +72,7 @@ class AddVaccinesTest {
         }
         server.onVaccineListRequestFailed = { vaccineListReceived = false }
         server.getVaccineList()
-        sleep(500)
+        sleep(1000)
 
         assertTrue(isVaccineAdded)
         assertTrue(vaccineListReceived)

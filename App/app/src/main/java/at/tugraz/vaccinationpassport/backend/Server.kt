@@ -134,7 +134,6 @@ class Server(private val repository: Repository) : Parcelable {
 
         GlobalScope.launch {
             try {
-                System.out.println("launch")
                 val response = repository.addVaccineDetails(passportNumber!!, vacDetails, authToken!!)
 
                 GlobalScope.launch(Dispatchers.Main) {
@@ -143,7 +142,6 @@ class Server(private val repository: Repository) : Parcelable {
             } catch (e: Exception) {
                 GlobalScope.launch(Dispatchers.Main) {
                     onVaccineAddingFailed()
-                    System.out.println("addVaccine")
                 }
             }
         }
@@ -152,17 +150,14 @@ class Server(private val repository: Repository) : Parcelable {
     private fun handleAddVaccineResponse(response: Response<Boolean>) {
         if (!response.isSuccessful || response.code() != 200) {
             onVaccineAddingFailed()
-            System.out.println("handleAddVaccineResponse1")
             return
         }
 
         if (response.body() == true) {
             onVaccineAdded()
-            System.out.println("handleAddVaccineResponse2:success")
         }
         else {
             onVaccineAddingFailed()
-            System.out.println("handleAddVaccineResponse2:fail")
         }
 
     }
