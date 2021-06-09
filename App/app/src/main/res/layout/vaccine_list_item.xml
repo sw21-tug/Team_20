@@ -7,6 +7,8 @@
     android:layout_marginTop="5dp"
     android:paddingStart="12dp"
     android:paddingEnd="12dp"
+    android:clickable="true"
+    android:onClick="onSingleVacView"
     android:background="@drawable/vaccine_list_item_boarder">
 
     <TextView
