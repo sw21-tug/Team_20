@@ -5,6 +5,7 @@ import android.os.Parcelable
 import at.tugraz.vaccinationpassport.Vaccination
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
+import at.tugraz.vaccinationpassport.backend.api.data.VaccineDetails
 import retrofit2.Response
 
 class Repository() : Parcelable {
@@ -21,6 +22,10 @@ class Repository() : Parcelable {
         return Response.success(List<Vaccination>(5) { index ->
             Vaccination("Vaccine Nr. $index", "2021-0${index + 1}-0${index + 1}")
         })
+    }
+
+    suspend fun addVaccineDetails(passportNumber: String, vacDetails: VaccineDetails, authToken: String): Response<Boolean> {
+        return RetrofitInstance.api.pushAddVaccine(passportNumber, vacDetails, authToken)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

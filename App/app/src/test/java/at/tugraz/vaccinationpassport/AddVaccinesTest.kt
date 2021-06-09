@@ -4,6 +4,7 @@ import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.RetrofitInstance
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import at.tugraz.vaccinationpassport.backend.api.data.VaccineDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -43,6 +44,7 @@ class AddVaccinesTest {
 
     @Test
     fun loginDoctorAddVac() {
+        System.out.println("Started")
         var server = Server(Repository())
         val loginDetailsDoctor = LoginDetails("11223344", "password")
         server.login(loginDetailsDoctor)
@@ -51,7 +53,9 @@ class AddVaccinesTest {
         server.onVaccineAdded = {
             isVaccineAdded = true
         }
-        server.onVaccineAddingFailed = { isVaccineAdded = false }
+        server.onVaccineAddingFailed = {
+            isVaccineAdded = false
+        }
 
         val vaccination = Vaccination("Common Cold", "26.05.2021 11:11")
         val vacDetails = VaccineDetails("12345678", vaccination)
