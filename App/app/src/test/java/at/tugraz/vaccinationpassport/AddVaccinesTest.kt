@@ -25,7 +25,7 @@ class AddVaccinesTest {
     @Before
     fun setup() {
         isVaccineAdded = false
-        requestFailed = false
+        vaccineListReceived = false
         isVaccineListValid = false
 
         RetrofitInstance.url = "http://127.0.0.1:8080"
@@ -72,8 +72,8 @@ class AddVaccinesTest {
         sleep(500)
 
         assertTrue(isVaccineAdded)
+        assertTrue(vaccineListReceived)
         assertTrue(isVaccineListValid)
-        assertFalse(isVaccineListValid)
     }
 
     fun testVaccineList(vaccine_list : List<Vaccination>, vaccination: Vaccination ){
