@@ -46,7 +46,7 @@ class DocAddActivityTest{
         val vaccineDetails = VaccineDetails("12345678", Vaccination("MyCold", "10.10.2020"))
 
         onView(withId(R.id.PassportNumber)).perform(
-            typeText(vaccineDetails.passportNr),
+            typeText(vaccineDetails.passportNumber),
             closeSoftKeyboard()
         )
         onView(withId(R.id.vaccinesName)).perform(

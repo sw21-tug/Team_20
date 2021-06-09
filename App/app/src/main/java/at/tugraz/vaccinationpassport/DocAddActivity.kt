@@ -6,11 +6,15 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.isDigitsOnly
 import androidx.drawerlayout.widget.DrawerLayout
 import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
+import at.tugraz.vaccinationpassport.backend.api.data.VaccineDetails
 import at.tugraz.vaccinationpassport.utils.changeLocale
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_doctor_adds_vaccines.*
@@ -83,4 +87,49 @@ class DocAddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
         return super.onOptionsItemSelected(item)
     }
+
+    fun onAddClicked(view: View) {
+
+        val vacDetails = getEnteredData()
+        if (vacDetails == null) {
+            //displayAddVaccineError(getString(R.string.invalid_login_details))
+            return
+        }
+
+        server.onVaccineAdded = ::onVaccineAdd
+        server.onVaccineAddingFailed = ::onVaccineAddingFailed
+        server.addVaccine(vacDetails)
+    }
+
+    private fun getEnteredData(): VaccineDetails? {
+        val passport = findViewById<EditText>(R.id.PassportNumber) ?: return null
+        val name = findViewById<EditText>(R.id.vaccinesName) ?: return null
+        val date = findViewById<EditText>(R.id.vaccinesDate) ?: return null
+        val time = findViewById<EditText>(R.id.vaccinesTime) ?: return null
+
+        if(!passport.text.isDigitsOnly() || name.text.isEmpty() || date.text.isEmpty())
+            return null;
+
+        return VaccineDetails(passport.text.toString(),
+            Vaccination(
+                name.text.toString(),
+                date.text.toString() + " " + time.text.toString()))
+    }
+
+    private fun onVaccineAdd() {
+        val passport = findViewById<EditText>(R.id.PassportNumber) ?: return
+        val name = findViewById<EditText>(R.id.vaccinesName) ?: return
+        val date = findViewById<EditText>(R.id.vaccinesDate) ?: return
+        val time = findViewById<EditText>(R.id.vaccinesTime) ?: return
+
+        passport.setText("")
+        name.setText("")
+        date.setText("")
+        time.setText("")
+    }
+
+    private fun onVaccineAddingFailed() {
+        //displayAddVaccineError(getString(R.string.invalid_login_details))
+    }
+
 }
