@@ -60,19 +60,26 @@ class VaccineListActivityTest
 
         onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineName,
-                0, withText("Vaccine Nr. 0"))))
+                0, withText("Covid"))))
 
-        /*onView(withId(R.id.rvVaccineList))
-            .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccinationDate,
-                0, withText("2021-01-01"))))
+        onView(withId(R.id.rvVaccineList))
+            .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineName,
+                1, withText("FSME"))))
+
+        onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineDate,
-                0, withText("2021-01-01"))))*/
+                0, withText("21-01-2021"))))
+
+        onView(withId(R.id.rvVaccineList))
+            .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineDate,
+                1, withText("29-05-2015"))))
+
 
         onView(withId(R.id.rvVaccineList))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()));
 
         Thread.sleep(500)
-        checkLabel(R.id.tvVacName, "Vaccine Nr. 0")
+        checkLabel(R.id.tvVacName, "Covid")
 
         scenario.close()
     }
