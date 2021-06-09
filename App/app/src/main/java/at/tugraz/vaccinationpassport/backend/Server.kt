@@ -91,7 +91,7 @@ class Server(private val repository: Repository) : Parcelable {
     fun getVaccineList() {
 
         // check if authentication token is valid
-        if(authToken == null)
+        if(authToken == null || passportNumber == null)
         {
             onVaccineListRequestFailed()
             return
@@ -99,7 +99,7 @@ class Server(private val repository: Repository) : Parcelable {
 
         GlobalScope.launch {
             try {
-                val response = repository.getVaccineList(authToken!!)
+                val response = repository.getVaccineList(passportNumber!!, authToken!!)
 
                 GlobalScope.launch(Dispatchers.Main) {
                     handleVaccineListResponse(response)
@@ -112,7 +112,7 @@ class Server(private val repository: Repository) : Parcelable {
         }
     }
 
-    private fun handleVaccineListResponse(response: Response<List<Vaccination>>) {
+    private fun handleVaccineListResponse(response: Response<MutableList<Vaccination>>) {
         if (!response.isSuccessful) {
             onVaccineListRequestFailed()
             return
