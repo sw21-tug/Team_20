@@ -4,13 +4,10 @@ import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.RetrofitInstance
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
-import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.*
@@ -19,15 +16,15 @@ import org.junit.Test
 import java.lang.Thread.sleep
 
 class AddVaccinesTest {
-    var requestSuccessful: Boolean = false
-    var requestFailed: Boolean = false
+    var isVaccineAdded: Boolean = false
+    var vaccineListReceived: Boolean = false
     var isVaccineListValid: Boolean = false
     private val testDispatcher = TestCoroutineDispatcher()
 
     @ExperimentalCoroutinesApi
     @Before
     fun setup() {
-        requestSuccessful = false
+        isVaccineAdded = false
         requestFailed = false
         isVaccineListValid = false
 
@@ -47,36 +44,36 @@ class AddVaccinesTest {
     @Test
     fun loginDoctorAddVac() {
         var server = Server(Repository())
-        val loginDoctorDetails = LoginDetails("11223344", "password")
-        server.login(loginDetails)
-        Thread.sleep(500)
+        val loginDetailsDoctor = LoginDetails("11223344", "password")
+        server.login(loginDetailsDoctor)
+        sleep(500)
 
         server.onVaccineAdded = {
-            requestSuccessful = true
+            isVaccineAdded = true
         }
-        server.onVaccineAddingFailed = { requestFailed = true }
+        server.onVaccineAddingFailed = { isVaccineAdded = false }
 
         val vaccination = Vaccination("Common Cold", "26.05.2021 11:11")
         val vacDetails = VaccineDetails("12345678", vaccination)
         server.addVaccine(vacDetails)
-        Thread.sleep(500)
+        sleep(500)
 
         server = Server(Repository())
-        val loginDetails = LoginDetails("12345678", "password")
-        server.login(loginDetails)
-        Thread.sleep(500)
+        val loginDetailsUser = LoginDetails("12345678", "password")
+        server.login(loginDetailsUser)
+        sleep(500)
 
         server.onVaccineListReceived = { vaccine_list ->
-            requestSuccessful = true
+            vaccineListReceived = true
             testVaccineList(vaccine_list, vaccination)
         }
-        server.onVaccineListRequestFailed = { requestFailed = true }
+        server.onVaccineListRequestFailed = { vaccineListReceived = false }
         server.getVaccineList()
         sleep(500)
 
-        assertTrue(requestSuccessful)
+        assertTrue(isVaccineAdded)
         assertTrue(isVaccineListValid)
-        assertFalse(requestFailed)
+        assertFalse(isVaccineListValid)
     }
 
     fun testVaccineList(vaccine_list : List<Vaccination>, vaccination: Vaccination ){
