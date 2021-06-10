@@ -64,15 +64,15 @@ class VaccineListActivityTest
 
         onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineName,
-                1, withText("FSME"))))
+                1, withText("Malaria"))))
 
         onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineDate,
-                0, withText("21-01-2021"))))
+                0, withText("05-05-2021"))))
 
         onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineDate,
-                1, withText("29-05-2015"))))
+                1, withText("05-05-2021"))))
 
 
         onView(withId(R.id.rvVaccineList))
