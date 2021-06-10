@@ -1,5 +1,6 @@
 package at.tugraz.vaccinationpassport.backend.api
 
+import at.tugraz.vaccinationpassport.Vaccination
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
 import at.tugraz.vaccinationpassport.backend.api.data.VaccineDetails
@@ -26,4 +27,9 @@ interface ServerApi {
         @Header("Authorization") authToken: String
     ): Response<ProfileData>
 
+    @GET("/users/{passportNumber}/vaccines")
+    suspend fun getVaccineList(
+        @Path("passportNumber") passportNumber: String,
+        @Header("Authorization") authToken: String
+    ): Response<MutableList<Vaccination>>
 }

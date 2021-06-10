@@ -18,10 +18,9 @@ class Repository() : Parcelable {
         return RetrofitInstance.api.getUserProfile(passportNumber, authToken)
     }
 
-    fun getVaccineList(authToken: String): Response<List<Vaccination>> {
-        return Response.success(List<Vaccination>(5) { index ->
-            Vaccination("Vaccine Nr. $index", "2021-0${index + 1}-0${index + 1}")
-        })
+    suspend fun getVaccineList(passportNumber: String, authToken: String): Response<MutableList<Vaccination>> {
+        return RetrofitInstance.api.getVaccineList(passportNumber, authToken)
+
     }
 
     suspend fun addVaccineDetails(passportNumber: String, vacDetails: VaccineDetails, authToken: String): Response<Boolean> {
