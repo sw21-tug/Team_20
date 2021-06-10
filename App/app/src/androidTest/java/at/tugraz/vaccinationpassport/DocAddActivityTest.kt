@@ -81,11 +81,6 @@ class DocAddActivityTest{
         onView(withId(R.id.rvVaccineList))
             .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccineName,
                 position, withText(vaccine.name))))
-
-
-        onView(withId(R.id.rvVaccineList))
-            .check(matches(childOfViewAtPositionWithMatcher(R.id.tvVaccinationDate,
-                position, withText(vaccine.date))))
     }
 
     private fun openVaccineList() {

@@ -81,11 +81,8 @@ class VaccineListActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     private fun setVaccineList(vaccineList: List<Vaccination>) {
 
-        vaccineListAdapter.addVaccines(vaccineList)
-
         vaccineListAdapter = VaccineListAdapter(mutableListOf())
-        vaccineListAdapter.addVaccine(Vaccination("Covid", "05-05-2021"))
-        vaccineListAdapter.addVaccine(Vaccination("Malaria", "05-05-2021"))
+        vaccineListAdapter.addVaccines(vaccineList)
         rvVaccineList.adapter = vaccineListAdapter;
 
         val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
