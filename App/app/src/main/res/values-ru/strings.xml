@@ -23,4 +23,10 @@
     <string name="invalid_login_details">Неверный номер паспорта / пароль</string>
     <string name="could_not_connect_to_server">не удалось установить соединение с сервером</string>
     <string name="registering_not_implemented">Регистрация не реализована</string>
+
+    <string name="addVacTitle">Добавить вакцину</string>
+    <string name="vacNameHint">Название вакцины</string>
+    <string name="vacDateHint">Дата: дд.мм.гггг</string>
+    <string name="vacTimeHint">Время: чч: мм</string>
+    <string name="addButton">Добавлять</string>
 </resources>

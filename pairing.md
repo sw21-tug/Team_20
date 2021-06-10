@@ -7,27 +7,13 @@ Dev 5: Nicholas Gratzer
 Dev 6: Philipp Schrank
     
 
-### Sprint 1
 
 | Syntax      | Florian     | Irena   	  | Markus   	| Martin      | Nicholas    | Philipp   	
 | :---        |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |
-| Florian     | X           | 12:00       | 00:00       | 00:00       | 00:00       | 00:00       |
-| Irena       | 12:00       | X           | 00:00       | 00:00       | 00:00       | 00:00       |
-| Markus      | 00:00       | 00:00       | X           | 00:00       | 00:00       | 14:00       |
-| Martin      | 00:00       | 00:00       | 00:00       | X           | 14:00       | 00:00       |
-| Nicholas    | 00:00       | 00:00       | 00:00       | 14:00       | X           | 00:00       | 
+| Florian     | X           | X           | X           | X           | X           | X           |
+| Irena       | 20:00       | X           | X           | X           | X           | X           |
+| Markus      | 08:00       | 06:00       | X           | X           | X           | X           |
+| Martin      | 09:00       | 08:00       | 08:00       | X           | X           | X           |
+| Nicholas    | 07:00       | 05:00       | 16:00       | 23:00       | X           | X           | 
 | Philipp     | 00:00       | 00:00       | 14:00       | 00:00       | 00:00       | X           |
 
-
-### Sprint 2
-
-| Syntax      | Florian     | Irena   	  | Markus   	| Martin      | Nicholas    | Philipp   	
-| :---        |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |
-| Florian     | X           | 00:00       | 00:00       | 02:00       | 00:00       | 00:00       |
-| Irena       | 00:00       | X           | 00:00       | 00:00       | 00:00       | 00:00       |
-| Markus      | 00:00       | 00:00       | X           | 00:00       | 06:00       | 00:00       |
-| Martin      | 02:00       | 00:00       | 00:00       | X           | 00:00       | 00:00       |
-| Nicholas    | 00:00       | 00:00       | 06:00       | 00:00       | X           | 00:00       | 
-| Philipp     | 00:00       | 00:00       | 00:00       | 00:00       | 00:00       | X           |
-
-Irena researches because Philipp is absent

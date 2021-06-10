@@ -1,10 +1,11 @@
 package at.tugraz.vaccinationpassport.backend.api
 
+import at.tugraz.vaccinationpassport.Vaccination
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
+import at.tugraz.vaccinationpassport.backend.api.data.VaccineDetails
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ServerApi {
 
@@ -13,5 +14,22 @@ interface ServerApi {
         @Body loginDetails: LoginDetails
     ): Response<Unit>
 
+    @POST("/users/{passportNumber}/add-vaccine")
+    suspend fun pushAddVaccine(
+        @Path("passportNumber") passportNumber: String,
+        @Body vaccineDetails: VaccineDetails,
+        @Header("Authorization") authToken: String
+    ): Response<Boolean>
 
+    @GET("/users/{passportNumber}")
+    suspend fun getUserProfile(
+        @Path("passportNumber") passportNumber: String,
+        @Header("Authorization") authToken: String
+    ): Response<ProfileData>
+
+    @GET("/users/{passportNumber}/vaccines")
+    suspend fun getVaccineList(
+        @Path("passportNumber") passportNumber: String,
+        @Header("Authorization") authToken: String
+    ): Response<MutableList<Vaccination>>
 }

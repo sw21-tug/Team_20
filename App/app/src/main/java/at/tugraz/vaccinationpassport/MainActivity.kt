@@ -2,8 +2,6 @@ package at.tugraz.vaccinationpassport
 
 
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -16,14 +14,15 @@ import androidx.drawerlayout.widget.DrawerLayout
 import at.tugraz.vaccinationpassport.backend.Server
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
+import at.tugraz.vaccinationpassport.utils.changeLocale
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val server = Server(Repository())
     lateinit var toggle : ActionBarDrawerToggle
 
+    /*
     fun setLocale(languageCode: String?) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
@@ -33,16 +32,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         resources.updateConfiguration(config, resources.getDisplayMetrics())
     }
 
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = this.intent
-        val language = intent.extras?.get(resources.getString(R.string.language_key))
-        if (language != null) {
-            setLocale(language as String?)
-        }
-        else {
-            setLocale("en")
-        }
+
+        val language = this.intent.extras?.get(resources.getString(R.string.language_key))
+        changeLocale(language as String?, "en", this.resources)
 
         setContentView(R.layout.activity_main)
         val drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
@@ -122,14 +118,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return LoginDetails(passportNumber, passwordString)
     }
 
-    private fun onLoginSuccessful() {
+    private fun onLoginSuccessful(isDoctor: Boolean) {
         val password = findViewById<EditText>(R.id.loginPassword)
         password.setText("")
 
         val language = this.intent.extras?.getString(resources.getString(R.string.language_key))
         // Switch to other activity
-        val intent = Intent(this, UserProfileActivity::class.java)
+        val intent = if (isDoctor) {
+            Intent(this, DocAddActivity::class.java)
+        } else {
+            Intent(this, UserProfileActivity::class.java)
+        }
         intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
+        intent.putExtra("Server", server)
         startActivity(intent)
     }
 
