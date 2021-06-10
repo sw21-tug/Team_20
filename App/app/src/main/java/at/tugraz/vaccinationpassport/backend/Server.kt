@@ -7,6 +7,7 @@ import at.tugraz.vaccinationpassport.Vaccination
 import at.tugraz.vaccinationpassport.backend.api.Repository
 import at.tugraz.vaccinationpassport.backend.api.data.LoginDetails
 import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
+import at.tugraz.vaccinationpassport.backend.api.data.VaccineDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,6 +27,9 @@ class Server(private val repository: Repository) : Parcelable {
 
     var onVaccineListReceived: (List<Vaccination>) -> Unit = {}
     var onVaccineListRequestFailed: () -> Unit = {}
+
+    var onVaccineAdded: () -> Unit = {}
+    var onVaccineAddingFailed: () -> Unit = {}
 
     fun login(loginDetails: LoginDetails) {
         passportNumber = loginDetails.passportNumber
@@ -121,6 +125,42 @@ class Server(private val repository: Repository) : Parcelable {
         onVaccineListReceived(response.body()!!)
     }
 
+    fun addVaccine(vacDetails: VaccineDetails) {
+        if(authToken == null || passportNumber == null)
+        {
+            onVaccineAddingFailed()
+            return
+        }
+
+        GlobalScope.launch {
+            try {
+                val response = repository.addVaccineDetails(passportNumber!!, vacDetails, authToken!!)
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    handleAddVaccineResponse(response)
+                }
+            } catch (e: Exception) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    onVaccineAddingFailed()
+                }
+            }
+        }
+    }
+
+    private fun handleAddVaccineResponse(response: Response<Boolean>) {
+        if (!response.isSuccessful || response.code() != 200) {
+            onVaccineAddingFailed()
+            return
+        }
+
+        if (response.body() == true) {
+            onVaccineAdded()
+        }
+        else {
+            onVaccineAddingFailed()
+        }
+
+    }
 
     // Parcelable implementation:
 
