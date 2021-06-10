@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/disease"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:paddingStart="12dp"
             app:layout_constraintBottom_toTopOf="@+id/rvVaccineList"
             app:layout_constraintStart_toStartOf="parent" />
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:paddingEnd="12dp"
             app:layout_constraintBottom_toTopOf="@+id/rvVaccineList"
             app:layout_constraintEnd_toEndOf="parent" />

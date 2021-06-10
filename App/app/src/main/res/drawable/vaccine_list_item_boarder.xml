@@ -11,7 +11,7 @@
     <corners android:radius="10dp" />
 
     <solid
-        android:color="#FFC0CB"
+        android:color="#FFFFFF"
         />
 
     // Add your desired padding

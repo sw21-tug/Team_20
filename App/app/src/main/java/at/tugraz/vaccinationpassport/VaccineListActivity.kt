@@ -5,12 +5,17 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
+import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import at.tugraz.vaccinationpassport.backend.Server
+import at.tugraz.vaccinationpassport.backend.api.Repository
+import at.tugraz.vaccinationpassport.backend.api.data.ProfileData
 import kotlinx.android.synthetic.main.activity_vaccine_list.*
 import kotlinx.android.synthetic.main.activity_vaccine_list.toolbar
 import java.util.*
@@ -18,6 +23,7 @@ import java.util.*
 class VaccineListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var vaccineListAdapter : VaccineListAdapter
     lateinit var toggle : ActionBarDrawerToggle
+    private lateinit var server: Server
 
     fun setLocale(languageCode: String?) {
         val locale = Locale(languageCode)
@@ -29,9 +35,10 @@ class VaccineListActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         val intent = this.intent
-        val language = intent.extras?.get(resources.getString(R.string.language_key))
+        val language = this.intent.extras?.getString(resources.getString(R.string.language_key))
         if (language != null) {
             setLocale(language as String?)
         }
@@ -39,19 +46,42 @@ class VaccineListActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             setLocale("en")
         }
 
-        setContentView(R.layout.activity_vaccine_list)
+        vaccineListAdapter = VaccineListAdapter(mutableListOf())
 
-        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText) //findViewById(R.id.tvNameText) as TextView
+        val tempServer = intent.extras?.get("Server")
+        if (tempServer != null) {
+            server = tempServer as Server
+            server.onProfileReceived = ::setProfileData
+            server.onVaccineListReceived = ::setVaccineList
+            server.onProfileRequestFailed = { Log.w("Client-Server", "Profile Request failed") }
+            server.onVaccineListRequestFailed = { Log.w("Client-Server", "Vaccinelist Request failed") }
+            server.getProfile()
+            server.getVaccineList()
+        } else {
+            Log.w("Intent", "The server was not passed to the new Activity")
+            server = Server(Repository())
+        }
+
+        setContentView(R.layout.activity_vaccine_list)
+        rvVaccineList.adapter = vaccineListAdapter;
+    }
+
+    private fun setProfileData(profile: ProfileData) {
+        val nameText : TextView =  findViewById<TextView>(R.id.tvNameText)
         val ageText : TextView = findViewById<TextView>(R.id.tvAgeText)
         val passNrText : TextView = findViewById<TextView>(R.id.tvPassNrText)
         val nrVacText : TextView = findViewById<TextView>(R.id.tvNrVacText)
 
-        val person = listOf<String>("Max Mustermann", "25", "1234567", "5")
+        nameText.text = profile.name
+        ageText.text = profile.age.toString()
+        passNrText.text = profile.passportNumber.toString()
+        nrVacText.text = profile.nrOfVaccines.toString()
 
-        nameText.text = person[0]
-        ageText.text = person[1]
-        passNrText.text = person[2]
-        nrVacText.text = person[3]
+    }
+
+    private fun setVaccineList(vaccineList: List<Vaccination>) {
+
+        vaccineListAdapter.addVaccines(vaccineList)
 
         vaccineListAdapter = VaccineListAdapter(mutableListOf())
         vaccineListAdapter.addVaccine(Vaccination("Covid", "05-05-2021"))
@@ -91,4 +121,16 @@ class VaccineListActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
         return true
     }
+
+    fun onSingleVacView(view: View) {
+        val intent = Intent(applicationContext, SingleVaccineViewActivity::class.java)
+        val language = this.intent.extras?.getString(resources.getString(R.string.language_key))
+        intent.putExtra(applicationContext.resources.getString(R.string.language_key), language)
+        intent.putExtra("Server", server)
+        val vaccineName : TextView = view.findViewById<TextView>(R.id.tvVaccineName)
+        intent.putExtra("VaccineName", vaccineName.text)
+        startActivity(intent)
+    }
+
+
 }
